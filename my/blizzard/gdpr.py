@@ -5,8 +5,9 @@ from: https://github.com/purarue/blizzard_gdpr_parser
 
 # see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import blizzard as user_config  # type: ignore[attr-defined]
-from my.core import PathIsh, dataclass, make_logger
-from my.core.common import mcachew
+from dataclasses import dataclass
+from my.core import PathIsh, make_logger
+from my.core.cachew import mcachew
 
 
 @dataclass

@@ -13,7 +13,8 @@ from datetime import datetime
 from typing import Iterator, List, Tuple, NamedTuple, Optional
 from functools import lru_cache
 
-from my.core import Stats, make_logger, PathIsh, dataclass, make_config, get_files
+from dataclasses import dataclass
+from my.core import Stats, make_logger, PathIsh, make_config, get_files
 from my.core.structure import match_structure
 
 from malexport.paths import LocalDir

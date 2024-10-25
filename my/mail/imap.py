@@ -18,7 +18,8 @@ from typing import (
 )
 
 
-from my.core import Stats, Paths, dataclass, get_files, make_config
+from dataclasses import dataclass
+from my.core import Stats, Paths, get_files, make_config
 from .common import Email, unique_mail
 
 

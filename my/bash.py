@@ -33,8 +33,9 @@ from itertools import chain
 
 from more_itertools import unique_everseen
 
-from my.core import get_files, Stats, make_logger, Paths, dataclass
-from my.core.common import mcachew
+from dataclasses import dataclass
+from my.core import get_files, Stats, make_logger, Paths
+from my.core.cachew import mcachew
 from my.utils.time import parse_datetime_sec
 from my.utils.input_source import InputSource
 

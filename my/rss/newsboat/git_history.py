@@ -22,7 +22,8 @@ from git_doc_history import (
     Diff,
 )
 
-from my.core import Stats, PathIsh, dataclass
+from dataclasses import dataclass
+from my.core import Stats, PathIsh
 
 
 @dataclass

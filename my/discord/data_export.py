@@ -10,10 +10,11 @@ REQUIRES = [
 
 from pathlib import Path
 from typing import List
+from dataclasses import dataclass
 
 from my.config import discord as user_config  # type: ignore[attr-defined]
-from my.core import PathIsh, dataclass, make_config
-from my.core.common import mcachew
+from my.core import PathIsh, make_config
+from my.core.cachew import mcachew
 
 
 @dataclass

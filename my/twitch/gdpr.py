@@ -6,7 +6,8 @@ https://www.twitch.tv/p/en/legal/privacy-choices/#user-privacy-requests
 # see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import twitch as user_config  # type: ignore[attr-defined]
 
-from my.core import PathIsh, dataclass
+from dataclasses import dataclass
+from my.core import PathIsh
 
 
 @dataclass
@@ -22,7 +23,8 @@ from typing import Iterator, Union, Sequence, List
 from .common import Event, Results
 
 from my.core import make_logger
-from my.core.common import get_files, mcachew, Stats
+from my.core.cachew import mcachew
+from my.core.common import get_files
 from my.utils.input_source import InputSource
 
 logger = make_logger(__name__)
@@ -57,9 +59,3 @@ def _parse_csv_file(p: Path) -> Iterator[Event]:
                 channel=line[5],
                 context=context,
             )
-
-
-def stats() -> Stats:
-    from my.core import stat
-
-    return {**stat(events)}

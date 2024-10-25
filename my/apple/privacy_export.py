@@ -7,7 +7,8 @@ REQUIRES = ["lxml"]
 
 # see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import apple as user_config  # type: ignore[attr-defined]
-from my.core import PathIsh, dataclass
+from dataclasses import dataclass
+from my.core import PathIsh
 
 
 @dataclass
@@ -29,7 +30,7 @@ from more_itertools import sliced, first
 Element = Union[_Element, None]
 
 from my.core import Stats, Res, make_logger
-from my.core.common import mcachew
+from my.core.cachew import mcachew
 
 
 logger = make_logger(__name__)

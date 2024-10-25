@@ -10,7 +10,8 @@ REQUIRES = ["git+https://github.com/purarue/mpv-history-daemon"]
 from my.config import mpv as user_config  # type: ignore[attr-defined]
 
 from typing import Iterator, Sequence, Optional
-from my.core import Paths, dataclass, make_config
+from dataclasses import dataclass
+from my.core import Paths, make_config
 
 
 @dataclass

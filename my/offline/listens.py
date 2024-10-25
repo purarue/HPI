@@ -14,7 +14,8 @@ from typing import Iterator, Sequence
 from offline_listens.listens import Listen
 from offline_listens.parse import iter_dir, parse_file
 
-from my.core import get_files, Stats, Paths, dataclass
+from dataclasses import dataclass
+from my.core import get_files, Stats, Paths
 from my.utils.input_source import InputSource
 
 

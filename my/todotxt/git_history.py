@@ -19,7 +19,8 @@ from typing import Iterator
 
 from git_doc_history import DocHistory, parse_snapshot_diffs, Action
 
-from my.core import Stats, PathIsh, dataclass
+from dataclasses import dataclass
+from my.core import Stats, PathIsh
 from .common import Todo, TODOTXT_FILES, parse_todotxt_buffer
 
 

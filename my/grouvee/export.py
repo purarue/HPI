@@ -14,7 +14,8 @@ from functools import lru_cache
 from more_itertools import last
 import grouvee_export.dal as G
 
-from my.core import get_files, Stats, Paths, dataclass
+from dataclasses import dataclass
+from my.core import get_files, Stats, Paths
 
 
 @dataclass

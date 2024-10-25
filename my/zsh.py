@@ -28,6 +28,7 @@ from pathlib import Path
 from typing import Sequence, Optional
 from functools import lru_cache
 
+from dataclasses import dataclass
 from my.core import (
     get_files,
     warn_if_empty,
@@ -35,9 +36,8 @@ from my.core import (
     make_logger,
     PathIsh,
     Paths,
-    dataclass,
 )
-from my.core.common import mcachew
+from my.core.cachew import mcachew
 from my.core.warnings import low
 from my.utils.time import parse_datetime_sec
 from my.utils.input_source import InputSource

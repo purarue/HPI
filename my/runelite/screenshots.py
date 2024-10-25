@@ -7,7 +7,8 @@ https://github.com/runelite/runelite/wiki/Screenshot
 # see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import runelite as user_config  # type: ignore[attr-defined]
 
-from my.core import Paths, dataclass
+from dataclasses import dataclass
+from my.core import Paths
 
 
 @dataclass

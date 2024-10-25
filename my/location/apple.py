@@ -1,6 +1,5 @@
 from typing import Iterator
 
-from my.core.common import Stats
 from my.core.source import import_source
 from my.location.common import Location  # type: ignore[import]
 
@@ -19,9 +18,3 @@ def locations() -> Iterator[Location]:
                 elevation=None,
                 datasource="apple",
             )
-
-
-def stats() -> Stats:
-    from my.core import stat
-
-    return {**stat(locations)}

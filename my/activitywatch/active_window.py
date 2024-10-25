@@ -16,7 +16,8 @@ from typing import Iterator, Sequence, Union
 from functools import partial
 from itertools import chain
 
-from my.core import get_files, Stats, Paths, dataclass, make_logger, make_config
+from dataclasses import dataclass
+from my.core import get_files, Stats, Paths, make_logger, make_config
 from my.utils.input_source import InputSource
 
 from more_itertools import unique_everseen

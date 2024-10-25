@@ -4,7 +4,8 @@ Parses the facebook GPDR Export
 
 # see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import facebook as user_config  # type: ignore[attr-defined]
-from my.core import PathIsh, dataclass
+from dataclasses import dataclass
+from my.core import PathIsh
 
 
 @dataclass
