@@ -1,10 +1,10 @@
 """
-Parses scrobbles from https://github.com/seanbreckenridge/offline_listens
+Parses scrobbles from https://github.com/purarue/offline_listens
 """
 
-REQUIRES = ["git+https://github.com/seanbreckenridge/offline_listens"]
+REQUIRES = ["git+https://github.com/purarue/offline_listens"]
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import offline as user_config  # type: ignore[attr-defined]
 
 
@@ -14,7 +14,8 @@ from typing import Iterator, Sequence
 from offline_listens.listens import Listen
 from offline_listens.parse import iter_dir, parse_file
 
-from my.core import get_files, Stats, Paths, dataclass
+from dataclasses import dataclass
+from my.core import get_files, Stats, Paths
 from my.utils.input_source import InputSource
 
 

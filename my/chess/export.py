@@ -1,11 +1,11 @@
 """
 Parses chess games from chess.com/lichess.org using
-https://github.com/seanbreckenridge/chess_export
+https://github.com/purarue/chess_export
 """
 
-REQUIRES = ["git+https://github.com/seanbreckenridge/chess_export"]
+REQUIRES = ["git+https://github.com/purarue/chess_export"]
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import chess as user_config  # type: ignore[attr-defined]
 
 
@@ -17,8 +17,9 @@ import chess_export.chessdotcom.model as cmodel
 import chess_export.lichess.model as lmodel
 from more_itertools import unique_everseen
 
-from my.core import get_files, Stats, make_logger, Paths, dataclass
-from my.core.common import mcachew
+from dataclasses import dataclass
+from my.core import get_files, Stats, make_logger, Paths
+from my.core.cachew import mcachew
 from my.utils.input_source import InputSource
 
 

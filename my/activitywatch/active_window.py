@@ -1,14 +1,14 @@
 """
-Parses history from https://github.com/seanbreckenridge/aw-watcher-window
-using https://github.com/seanbreckenridge/active_window
+Parses history from https://github.com/purarue/aw-watcher-window
+using https://github.com/purarue/active_window
 """
 
 REQUIRES = [
-    "git+https://github.com/seanbreckenridge/aw-watcher-window",
-    "git+https://github.com/seanbreckenridge/active_window",
+    "git+https://github.com/purarue/aw-watcher-window",
+    "git+https://github.com/purarue/active_window",
 ]
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import activitywatch as user_config  # type: ignore[attr-defined]
 
 from pathlib import Path
@@ -16,7 +16,8 @@ from typing import Iterator, Sequence, Union
 from functools import partial
 from itertools import chain
 
-from my.core import get_files, Stats, Paths, dataclass, make_logger, make_config
+from dataclasses import dataclass
+from my.core import get_files, Stats, Paths, make_logger, make_config
 from my.utils.input_source import InputSource
 
 from more_itertools import unique_everseen

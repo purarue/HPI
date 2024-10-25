@@ -1,4 +1,4 @@
-This is a distillation of the steps described in [this issue](https://github.com/seanbreckenridge/HPI/issues/15)
+This is a distillation of the steps described in [this issue](https://github.com/purarue/HPI/issues/15)
 
 There are two mail parsing modules here -- `my.mail.imap` and `my.mail.mbox`. An [`mbox` file](https://docs.python.org/3/library/mailbox.html) is just a collection of email messages in a single text file
 
@@ -10,9 +10,9 @@ Note: There are _lots of_ different ways email clients/websites will export mess
 
 ## `my.mail.imap`
 
-Personally, I use `my.mail.imap`. To sync my mail, I use [`mutt-wizard`](https://github.com/LukeSmithxyz/mutt-wizard/), which uses `mbsync` under the hood to saves a bunch of individual mail files in `~/.local/share/mail` -- updating every 5 minutes. As a visual comparison to any files you may be trying to parse, [this is what one of those files looks like](https://gist.github.com/seanbreckenridge/5a629efacd72e7c28de0930f7e3ed8cf)
+Personally, I use `my.mail.imap`. To sync my mail, I use [`mutt-wizard`](https://github.com/LukeSmithxyz/mutt-wizard/), which uses `mbsync` under the hood to saves a bunch of individual mail files in `~/.local/share/mail` -- updating every 5 minutes. As a visual comparison to any files you may be trying to parse, [this is what one of those files looks like](https://gist.github.com/purarue/5a629efacd72e7c28de0930f7e3ed8cf)
 
-There are, of course, hundreds of ways to save your mail locally. Lets take [the ImportTools thunderbird add-on](https://addons.thunderbird.net/en-US/thunderbird/addon/importexporttools-ng/) as an example (since its the one we did troubleshooting on in the [issue](https://github.com/seanbreckenridge/HPI/issues/15)). To match the format `my.mail.imap` expects, select the folder you want to export, then use `Tools > ImportExportToolsNg > Export all messages in the Folder > Plain Text Format`, and export it to a folder somewhere. Then, in your config file, setup the block to point it at that path:
+There are, of course, hundreds of ways to save your mail locally. Lets take [the ImportTools thunderbird add-on](https://addons.thunderbird.net/en-US/thunderbird/addon/importexporttools-ng/) as an example (since its the one we did troubleshooting on in the [issue](https://github.com/purarue/HPI/issues/15)). To match the format `my.mail.imap` expects, select the folder you want to export, then use `Tools > ImportExportToolsNg > Export all messages in the Folder > Plain Text Format`, and export it to a folder somewhere. Then, in your config file, setup the block to point it at that path:
 
 ```python
 class mail:
@@ -89,4 +89,4 @@ hpi --debug query my.mail.mbox --stream
 
 ---
 
-If you use a different format and aren't able to figure out how to parse it, [create an issue](https://github.com/seanbreckenridge/HPI/issues/new)
+If you use a different format and aren't able to figure out how to parse it, [create an issue](https://github.com/purarue/HPI/issues/new)

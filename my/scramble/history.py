@@ -1,13 +1,14 @@
 """
 Timed Rubiks Cube Solve History from multiple sources using
-https://github.com/seanbreckenridge/scramble-history
+https://github.com/purarue/scramble-history
 """
 
-REQUIRES = ["git+https://github.com/seanbreckenridge/scramble-history"]
+REQUIRES = ["git+https://github.com/purarue/scramble-history"]
 
 from pathlib import Path
 from typing import Optional
-from my.core import dataclass, PathIsh, make_config
+from dataclasses import dataclass
+from my.core import PathIsh, make_config
 
 from my.config import scramble as user_config  # type: ignore[attr-defined]
 

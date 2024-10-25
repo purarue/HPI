@@ -1,13 +1,14 @@
 """
-Parses league of legend history from https://github.com/seanbreckenridge/lolexport
+Parses league of legend history from https://github.com/purarue/lolexport
 """
 
-REQUIRES = ["git+https://github.com/seanbreckenridge/lolexport"]
+REQUIRES = ["git+https://github.com/purarue/lolexport"]
 
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import league as user_config  # type: ignore[attr-defined]
-from my.core import Paths, dataclass
+from dataclasses import dataclass
+from my.core import Paths
 
 
 @dataclass

@@ -4,14 +4,15 @@ Parses local mbox files
 
 REQUIRES = ["mail-parser", "dateparser"]
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import mail as user_config  # type: ignore[attr-defined]
 
 import mailbox
 from pathlib import Path
 from typing import List, Iterator, Optional, Sequence, IO, Any
 
-from my.core import Stats, Paths, dataclass, get_files
+from dataclasses import dataclass
+from my.core import Stats, Paths, get_files
 from my.core import make_logger
 
 from .common import Email, unique_mail, try_decode_buf

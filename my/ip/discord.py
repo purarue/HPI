@@ -4,7 +4,7 @@ from my.ip.common import IP, drop_private  # type: ignore[import]
 
 
 from my.core import make_logger, Stats
-from my.core.common import mcachew
+from my.core.cachew import mcachew
 from my.core.source import import_source
 
 logger = make_logger(__name__)

@@ -2,9 +2,9 @@
 Parses the CSV export from https://www.grouvee.com/
 """
 
-REQUIRES = ["git+https://github.com/seanbreckenridge/grouvee_export"]
+REQUIRES = ["git+https://github.com/purarue/grouvee_export"]
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import grouvee as user_config  # type: ignore[attr-defined]
 
 from pathlib import Path
@@ -14,7 +14,8 @@ from functools import lru_cache
 from more_itertools import last
 import grouvee_export.dal as G
 
-from my.core import get_files, Stats, Paths, dataclass
+from dataclasses import dataclass
+from my.core import get_files, Stats, Paths
 
 
 @dataclass

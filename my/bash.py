@@ -1,7 +1,7 @@
 """
 Parses bash history (mostly from servers/vps I run)
 using the following bootstrap script:
-https://github.com/seanbreckenridge/bootstrap/
+https://github.com/purarue/bootstrap/
 
 This parses bash history with the following configuration:
 
@@ -22,7 +22,7 @@ command ls -al
 which ls
 """
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import bash as user_config  # type: ignore[attr-defined]
 
 from pathlib import Path
@@ -33,8 +33,9 @@ from itertools import chain
 
 from more_itertools import unique_everseen
 
-from my.core import get_files, Stats, make_logger, Paths, dataclass
-from my.core.common import mcachew
+from dataclasses import dataclass
+from my.core import get_files, Stats, make_logger, Paths
+from my.core.cachew import mcachew
 from my.utils.time import parse_datetime_sec
 from my.utils.input_source import InputSource
 

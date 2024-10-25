@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         platform: [ubuntu-latest, macos-latest]
-        python-version: [3.8, 3.9, "3.10", "3.11", "3.12"]
+        python-version: [ 3.9, "3.10", "3.11", "3.12"]
         exclude:
           [
             { platform: macos-latest, python-version: "3.8" },
@@ -24,17 +24,17 @@ jobs:
     steps:
       - run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0 # nicer to have all git history when debugging/for tests
 
       - run: ./install
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: .coverage.mypy-${{ matrix.platform }}_${{ matrix.python-version }}
           path: .coverage.mypy/

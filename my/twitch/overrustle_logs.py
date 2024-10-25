@@ -1,12 +1,13 @@
 """
 Reads parsed information from the overrustle logs dump
-https://github.com/seanbreckenridge/overrustle_parser
+https://github.com/purarue/overrustle_parser
 """
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import twitch as user_config  # type: ignore[attr-defined]
 
-from my.core import Paths, dataclass
+from dataclasses import dataclass
+from my.core import Paths
 
 
 @dataclass
@@ -19,7 +20,8 @@ from pathlib import Path
 from typing import Sequence, List
 
 from my.core import make_logger
-from my.core.common import get_files, mcachew, Stats
+from my.core.cachew import mcachew
+from my.core.common import get_files
 from my.utils.time import parse_datetime_sec
 from my.utils.input_source import InputSource
 
@@ -50,9 +52,3 @@ def _parse_json_dump(p: Path) -> Results:
             channel=blob["channel"],
             context=blob["message"],
         )
-
-
-def stats() -> Stats:
-    from my.core import stat
-
-    return {**stat(events)}

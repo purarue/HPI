@@ -9,10 +9,11 @@ REQUIRES = ["dateparser"]
 # as well use the datetimes for context on when I
 # was using skype
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import skype as user_config  # type: ignore[attr-defined]
 
-from my.core import Paths, Stats, dataclass
+from dataclasses import dataclass
+from my.core import Paths, Stats
 
 
 @dataclass

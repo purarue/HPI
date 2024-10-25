@@ -1,8 +1,8 @@
 """
-Parses history from https://github.com/seanbreckenridge/ttt
+Parses history from https://github.com/purarue/ttt
 """
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import ttt as user_config  # type: ignore[attr-defined]
 
 import csv
@@ -13,7 +13,8 @@ from itertools import chain
 
 from more_itertools import unique_everseen
 
-from my.core import get_files, Stats, Paths, dataclass
+from dataclasses import dataclass
+from my.core import get_files, Stats, Paths
 from my.utils.time import parse_datetime_sec
 from my.utils.input_source import InputSource
 

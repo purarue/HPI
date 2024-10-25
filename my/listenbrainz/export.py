@@ -1,11 +1,11 @@
 """
 Parses scrobbles from https://listenbrainz.org/ using
-https://github.com/seanbreckenridge/listenbrainz_export
+https://github.com/purarue/listenbrainz_export
 """
 
-REQUIRES = ["git+https://github.com/seanbreckenridge/listenbrainz_export"]
+REQUIRES = ["git+https://github.com/purarue/listenbrainz_export"]
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import listenbrainz as user_config  # type: ignore[attr-defined]
 
 
@@ -16,7 +16,8 @@ from itertools import chain
 from listenbrainz_export.parse import Listen, iter_listens
 from more_itertools import unique_everseen
 
-from my.core import get_files, Stats, make_logger, Paths, dataclass
+from dataclasses import dataclass
+from my.core import get_files, Stats, make_logger, Paths
 from my.utils.input_source import InputSource
 
 

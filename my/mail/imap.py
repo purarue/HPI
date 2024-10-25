@@ -6,7 +6,7 @@ Uses https://github.com/SpamScope/mail-parser to parse the mail
 
 REQUIRES = ["mail-parser", "dateparser"]
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import mail as user_config  # type: ignore[attr-defined]
 
 from pathlib import Path
@@ -18,7 +18,8 @@ from typing import (
 )
 
 
-from my.core import Stats, Paths, dataclass, get_files, make_config
+from dataclasses import dataclass
+from my.core import Stats, Paths, get_files, make_config
 from .common import Email, unique_mail
 
 

@@ -2,14 +2,14 @@ from pathlib import Path
 
 from more_itertools import ilen
 
-from .common import skip_if_not_seanb
+from .common import skip_if_not_pura
 
 
 def file_count(dir_name: Path) -> int:
     return ilen(dir_name.rglob("*"))
 
 
-@skip_if_not_seanb
+@skip_if_not_pura
 def test_commits() -> None:
     from my.coding.commits import repos, _cached_commits, Commit
 

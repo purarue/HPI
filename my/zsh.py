@@ -21,13 +21,14 @@ setopt EXTENDED_HISTORY   # save time/duration to history file
 # if on multiple computers, the zsh histories can be copied into the zsh.export_path
 # and it will merge everything without duplicates
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import zsh as user_config  # type: ignore[attr-defined]
 
 from pathlib import Path
 from typing import Sequence, Optional
 from functools import lru_cache
 
+from dataclasses import dataclass
 from my.core import (
     get_files,
     warn_if_empty,
@@ -35,9 +36,8 @@ from my.core import (
     make_logger,
     PathIsh,
     Paths,
-    dataclass,
 )
-from my.core.common import mcachew
+from my.core.cachew import mcachew
 from my.core.warnings import low
 from my.utils.time import parse_datetime_sec
 from my.utils.input_source import InputSource

@@ -30,8 +30,8 @@ havecmd() {
 
 set -e
 havecmd shellcheck
-havecmd exists 'See https://github.com/seanbreckenridge/exists'
-havecmd rifleman 'See https://github.com/seanbreckenridge/rifleman'
+havecmd exists 'See https://github.com/purarue/exists'
+havecmd rifleman 'See https://github.com/purarue/rifleman'
 havecmd pytest
 havecmd jq
 havecmd tput

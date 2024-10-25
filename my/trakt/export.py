@@ -1,11 +1,11 @@
 """
 Parses the dump of my movies/tv shows history and watchlist from https://trakt.tv/
-Uses https://github.com/seanbreckenridge/traktexport
+Uses https://github.com/purarue/traktexport
 """
 
-REQUIRES = ["git+https://github.com/seanbreckenridge/traktexport"]
+REQUIRES = ["git+https://github.com/purarue/traktexport"]
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import trakt as user_config  # type: ignore[attr-defined]
 
 from pathlib import Path
@@ -15,8 +15,9 @@ from functools import lru_cache
 import traktexport.dal as D
 from traktexport.merge import read_and_merge_exports
 
-from my.core import get_files, Stats, make_logger, Paths, dataclass
-from my.core.common import mcachew
+from dataclasses import dataclass
+from my.core import get_files, Stats, make_logger, Paths
+from my.core.cachew import mcachew
 
 
 @dataclass
