@@ -2,7 +2,7 @@
 Parses the facebook GPDR Export
 """
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import facebook as user_config  # type: ignore[attr-defined]
 from my.core import PathIsh, dataclass
 
@@ -502,7 +502,7 @@ def _parse_posts(d: FacebookJson) -> Iterator[Res[Union[Post, Action]]]:
                 )
             else:
                 yield RuntimeError("No known way to parse basic post {}".format(post))
-        # post without any actual content (e.g. {'timestamp': 1334515711, 'title': 'Sean Breckenridge posted in club'})
+        # post without any actual content (e.g. {'timestamp': 1334515711, 'title': 'purarue posted in club'})
         # treat this as an action since I have no content here
         elif set(("timestamp", "title")) == set(post.keys()):
             yield Action(

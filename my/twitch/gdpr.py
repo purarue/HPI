@@ -3,7 +3,7 @@ Parses the twitch GDPR data request
 https://www.twitch.tv/p/en/legal/privacy-choices/#user-privacy-requests
 """
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import twitch as user_config  # type: ignore[attr-defined]
 
 from my.core import PathIsh, dataclass

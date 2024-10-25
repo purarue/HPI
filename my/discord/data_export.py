@@ -3,7 +3,7 @@ Discord Data: messages and events data
 """
 
 REQUIRES = [
-    "git+https://github.com/seanbreckenridge/discord_data",
+    "git+https://github.com/purarue/discord_data",
     "urlextract",
 ]
 
@@ -19,7 +19,7 @@ from my.core.common import mcachew
 @dataclass
 class discord_config(user_config.data_export):
     # path to the top level discord export directory
-    # see https://github.com/seanbreckenridge/discord_data for more info
+    # see https://github.com/purarue/discord_data for more info
     export_path: PathIsh
 
     # whether to guess the compression of the files in the export_path
@@ -107,12 +107,16 @@ def test_remove_link_suppression() -> None:
     expected = "text  https://urlextract.readthedocs.io  other text"
     assert _remove_link_suppression(content) == expected
 
-    content = "t <https://urlextract.readthedocs.io> other <github.com> f <sean.fish>"
-    expected = "t  https://urlextract.readthedocs.io  other  github.com  f  sean.fish"
+    content = (
+        "t <https://urlextract.readthedocs.io> other <github.com> f <other.website>"
+    )
+    expected = (
+        "t  https://urlextract.readthedocs.io  other  github.com  f  other.website"
+    )
     assert _remove_link_suppression(content) == expected
 
-    content = "t <https://urlextract.readthedocs.io><sean.fish>"
-    expected = "t  https://urlextract.readthedocs.io  sean.fish"
+    content = "t <https://urlextract.readthedocs.io><other.website>"
+    expected = "t  https://urlextract.readthedocs.io  other.website"
     assert _remove_link_suppression(content) == expected
 
 

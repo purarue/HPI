@@ -1,9 +1,9 @@
 """
 Parses steam game/achievement data scraped with
-https://github.com/seanbreckenridge/steamscraper
+https://github.com/purarue/steamscraper
 """
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import steam as user_config  # type: ignore[attr-defined]
 from my.core import Paths, dataclass
 

@@ -1,11 +1,11 @@
 """
 Parses the data directory for my MAL export
-Uses https://github.com/seanbreckenridge/malexport/
+Uses https://github.com/purarue/malexport/
 """
 
-REQUIRES = ["git+https://github.com/seanbreckenridge/malexport"]
+REQUIRES = ["git+https://github.com/purarue/malexport"]
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import mal as user_config  # type: ignore[attr-defined]
 
 from pathlib import Path
@@ -30,7 +30,7 @@ class mal_config(user_config.export):
     export_path: PathIsh
 
     # this should be the top level directory, not the zip files or username directories
-    # see https://github.com/seanbreckenridge/malexport/#recover_deleted
+    # see https://github.com/purarue/malexport/#recover_deleted
     zip_backup_path: Optional[PathIsh] = None
 
 

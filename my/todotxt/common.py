@@ -28,7 +28,7 @@ class Todo(Task):
     def bare(self) -> str:
         return cast(str, self.bare_description())
 
-    # parse the deadline created by https://github.com/seanbreckenridge/full_todotxt
+    # parse the deadline created by https://github.com/purarue/full_todotxt
     # this is optional, so if it fails, just return None
     @property
     def deadline(self) -> Optional[datetime]:

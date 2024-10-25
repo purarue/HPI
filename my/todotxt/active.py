@@ -5,7 +5,7 @@ Parses your active todotxt (http://todotxt.org/) done.txt and todo.txt
 REQUIRES = ["pytodotxt>=1.5.0"]
 
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import todotxt as user_config  # type: ignore[attr-defined]
 
 

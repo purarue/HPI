@@ -1,8 +1,8 @@
 """
-Parses history from https://github.com/seanbreckenridge/ttt
+Parses history from https://github.com/purarue/ttt
 """
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import ttt as user_config  # type: ignore[attr-defined]
 
 import csv

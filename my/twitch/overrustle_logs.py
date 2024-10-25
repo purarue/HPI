@@ -1,9 +1,9 @@
 """
 Reads parsed information from the overrustle logs dump
-https://github.com/seanbreckenridge/overrustle_parser
+https://github.com/purarue/overrustle_parser
 """
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import twitch as user_config  # type: ignore[attr-defined]
 
 from my.core import Paths, dataclass

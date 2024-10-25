@@ -1,11 +1,11 @@
 """
 Parses piazza posts scraped by
-https://github.com/seanbreckenridge/piazza-scraper
+https://github.com/purarue/piazza-scraper
 """
 
-REQUIRES = ["git+https://github.com/seanbreckenridge/piazza-scraper"]
+REQUIRES = ["git+https://github.com/purarue/piazza-scraper"]
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import piazza as user_config  # type: ignore[attr-defined]
 from my.core import Paths, dataclass
 

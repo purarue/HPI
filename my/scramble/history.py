@@ -1,9 +1,9 @@
 """
 Timed Rubiks Cube Solve History from multiple sources using
-https://github.com/seanbreckenridge/scramble-history
+https://github.com/purarue/scramble-history
 """
 
-REQUIRES = ["git+https://github.com/seanbreckenridge/scramble-history"]
+REQUIRES = ["git+https://github.com/purarue/scramble-history"]
 
 from pathlib import Path
 from typing import Optional

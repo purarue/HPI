@@ -1,15 +1,15 @@
 """
 Parses todotxt (http://todotxt.org/) done.txt and todo.txt history
-from https://github.com/seanbreckenridge/git_doc_history backups
+from https://github.com/purarue/git_doc_history backups
 """
 
 REQUIRES = [
     "pytodotxt>=1.5.0",
-    "git+https://github.com/seanbreckenridge/git_doc_history",
+    "git+https://github.com/purarue/git_doc_history",
 ]
 
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import todotxt as user_config  # type: ignore[attr-defined]
 
 

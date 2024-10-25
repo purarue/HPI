@@ -1,10 +1,10 @@
 """
-Parses scrobbles from https://github.com/seanbreckenridge/offline_listens
+Parses scrobbles from https://github.com/purarue/offline_listens
 """
 
-REQUIRES = ["git+https://github.com/seanbreckenridge/offline_listens"]
+REQUIRES = ["git+https://github.com/purarue/offline_listens"]
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import offline as user_config  # type: ignore[attr-defined]
 
 

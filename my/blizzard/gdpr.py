@@ -1,9 +1,9 @@
 """
 Parses generic event data from my parsed GDPR data
-from: https://github.com/seanbreckenridge/blizzard_gdpr_parser
+from: https://github.com/purarue/blizzard_gdpr_parser
 """
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import blizzard as user_config  # type: ignore[attr-defined]
 from my.core import PathIsh, dataclass, make_logger
 from my.core.common import mcachew

@@ -12,7 +12,7 @@ https://projecteuler.net/history
 That txt file is what this accepts as input (can accept multiple)
 """
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import project_euler as user_config  # type: ignore[attr-defined]
 
 from my.core import Paths, dataclass

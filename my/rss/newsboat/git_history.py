@@ -2,10 +2,10 @@
 Parses when I added/removed newsboat subscriptions
 """
 
-REQUIRES = ["git+https://github.com/seanbreckenridge/git_doc_history"]
+REQUIRES = ["git+https://github.com/purarue/git_doc_history"]
 
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import rss as user_config  # type: ignore[attr-defined]
 
 

@@ -1,11 +1,11 @@
 """
 Parses scrobbles from https://listenbrainz.org/ using
-https://github.com/seanbreckenridge/listenbrainz_export
+https://github.com/purarue/listenbrainz_export
 """
 
-REQUIRES = ["git+https://github.com/seanbreckenridge/listenbrainz_export"]
+REQUIRES = ["git+https://github.com/purarue/listenbrainz_export"]
 
-# see https://github.com/seanbreckenridge/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
+# see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import listenbrainz as user_config  # type: ignore[attr-defined]
 
 

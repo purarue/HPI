@@ -1,10 +1,10 @@
 from more_itertools import ilen
 
 
-from .common import skip_if_not_seanb
+from .common import skip_if_not_pura
 
 
-@skip_if_not_seanb
+@skip_if_not_pura
 def test_apple_types() -> None:
     from my.apple.privacy_export import (
         events,

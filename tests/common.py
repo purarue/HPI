@@ -4,11 +4,11 @@ from typing import Optional
 
 import pytest
 
-V = "HPI_TESTS_SEANB"
+V = "HPI_TESTS_PURA"
 
-skip_if_not_seanb = pytest.mark.skipif(
+skip_if_not_pura = pytest.mark.skipif(
     V not in os.environ,
-    reason=f"test on runs on @seanbreckenridge data for now. Set envvar {V}=true to override",
+    reason=f"test on runs on @purarue data for now. Set envvar {V}=true to override",
 )
 
 

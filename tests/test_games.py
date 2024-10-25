@@ -3,10 +3,10 @@ from typing import List
 from more_itertools import ilen
 from my.core.error import raise_exceptions
 
-from .common import skip_if_not_seanb
+from .common import skip_if_not_pura
 
 
-@skip_if_not_seanb
+@skip_if_not_pura
 def test_league() -> None:
     from my.league.export import history, Game
 
@@ -14,7 +14,7 @@ def test_league() -> None:
     assert len(gs) > 50
 
 
-@skip_if_not_seanb
+@skip_if_not_pura
 def test_steam() -> None:
     from my.steam.scraper import games, achievements, Achievement
 
