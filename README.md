@@ -6,7 +6,7 @@ It's a Python library (named `my`), a collection of modules for:
 - shell/program histories (zsh, bash, python, mpv, firefox)
 - programming (github/commits)
 - instant messaging
-- media histories (movies, TV shows, music, video game achievements/history); see <https://sean.fish/feed/>
+- media histories (movies, TV shows, music, video game achievements/history); see <https://purarue.xyz/feed/>
 
 [_Why?_](https://github.com/karlicoss/HPI#why)
 
@@ -87,7 +87,7 @@ Disregarding tools which actively collect data (like [`ttt`](https://github.com/
 - [`HPI_API`](https://github.com/purarue/HPI_API) - automatically creates a JSON API/server for HPI modules
 - [`url_metadata`](https://github.com/purarue/url_metadata) - caches youtube subtitles, url metadata (title, description, image links), and a html/plaintext summary for any URL
 
-I also use this in [`my_feed`](https://github.com/purarue/my_feed), which creates a feed of media/data using `HPI`, live at <https://sean.fish/feed/>
+I also use this in [`my_feed`](https://github.com/purarue/my_feed), which creates a feed of media/data using `HPI`, live at <https://purarue.xyz/feed/>
 
 ### Ad-hoc and interactive
 
