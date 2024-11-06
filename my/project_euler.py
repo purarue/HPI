@@ -26,12 +26,11 @@ class config(user_config):
 
 
 import re
+import csv
 from pathlib import Path
 from datetime import datetime, timezone
-from typing import Sequence, Iterator, NamedTuple
-from itertools import chain
-
-from more_itertools import unique_everseen
+from typing import Sequence, Iterator, NamedTuple, Optional, List, Dict
+from itertools import chain, groupby
 
 from my.core import get_files, Stats
 from my.utils.input_source import InputSource
@@ -40,6 +39,7 @@ from my.utils.input_source import InputSource
 class Solution(NamedTuple):
     problem: int
     dt: datetime
+    name: Optional[str]
 
 
 def project_euler_inputs() -> Sequence[Path]:
@@ -47,11 +47,23 @@ def project_euler_inputs() -> Sequence[Path]:
 
 
 def history(from_paths: InputSource = project_euler_inputs) -> Iterator[Solution]:
-    # hmm: maybe someone has multiple accounts and wants to keep track of multiple accounts?
-    # If so feel free to make an issue, just doesn't seem like a common use case
-    yield from unique_everseen(
+    # need to sort here to dedupe accurately
+    items: List[Solution] = sorted(
         chain(*map(_parse_file, from_paths())), key=lambda s: s.problem
     )
+    # group by items, and if there are multiple return the one with the name
+    # (or None if there is no name)
+    grouped: Dict[int, List[Solution]] = {
+        num: list(problems) for num, problems in groupby(items, lambda s: s.problem)
+    }
+    for items in grouped.values():
+        for item in items:
+            if item.name is not None:
+                yield item
+                break  # break out of the inner loop
+        else:
+            # no name on item, just yield the first
+            yield items[0]
 
 
 # Example line:
@@ -59,7 +71,7 @@ def history(from_paths: InputSource = project_euler_inputs) -> Iterator[Solution
 # project euler was started in early 2000s,
 # so no need to support 19XX
 # '14' means 2014
-LINE_REGEX = re.compile(r"(\d+):\s*(\d+)\s*(\w+)\s*(\d+)\s*\((\d+):(\d+)\)")
+OLD_LINE_REGEX = re.compile(r"(\d+):\s*(\d+)\s*(\w+)\s*(\d+)\s*\((\d+):(\d+)\)")
 
 # hardcoding instead of using calendar module avoid possible issues with locale
 MONTHS = [
@@ -79,9 +91,10 @@ MONTHS = [
 
 
 def _parse_file(p: Path) -> Iterator[Solution]:
-    for line in p.read_text().strip().splitlines():
-        m = LINE_REGEX.match(line)
+    for line in p.open():
+        m = OLD_LINE_REGEX.match(line)
         if m:
+            # old format
             problem, day, month_desc, year_short, hour, minute = m.groups()
             month_lowered = month_desc.lower()
             assert month_lowered in MONTHS, f"Couldn't find {month_lowered} in {MONTHS}"
@@ -96,7 +109,14 @@ def _parse_file(p: Path) -> Iterator[Solution]:
                     minute=int(minute),
                     tzinfo=timezone.utc,
                 ),
+                name=None,
             )
+        else:
+            # new format
+            csv_reader = csv.reader([line])
+            row = next(csv_reader)
+            dt = datetime.strptime(row[0], "%d %b %y (%H:%M)")
+            yield Solution(problem=int(row[1]), dt=dt, name=row[2])
 
 
 def stats() -> Stats:
