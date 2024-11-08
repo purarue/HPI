@@ -14,6 +14,7 @@ jobs:
         exclude:
           [
             { platform: macos-latest, python-version: "3.11" },
+            { platform: macos-latest, python-version: "3.12" },
           ]
 
     runs-on: ${{ matrix.platform }}
