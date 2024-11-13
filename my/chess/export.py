@@ -49,9 +49,9 @@ def _parse_export_file(p: Path) -> Results:
     # typically this raises a KeyError since the JSON didn't match
     # what the NamedTuple expects
     try:
-        yield from lmodel.from_export(str(p))
+        yield from lmodel.from_export(p)
     except Exception:
-        yield from cmodel.from_export(str(p))
+        yield from cmodel.from_export(p)
 
 
 @mcachew(depends_on=_cachew_depends_on, logger=logger)
