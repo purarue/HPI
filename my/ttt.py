@@ -8,15 +8,25 @@ from my.config import ttt as user_config  # type: ignore[attr-defined]
 import csv
 from pathlib import Path
 from datetime import datetime
-from typing import NamedTuple, Iterator, Sequence, Optional
+from io import StringIO
+from typing import (
+    NamedTuple,
+    Iterator,
+    Sequence,
+    Optional,
+)
 from itertools import chain
+from functools import partial
 
 from more_itertools import unique_everseen
 
 from dataclasses import dataclass
-from my.core import get_files, Stats, Paths
+from my.core import get_files, Stats, Paths, make_logger
 from my.utils.time import parse_datetime_sec
 from my.utils.input_source import InputSource
+from my.utils.parse_csv import parse_csv_file
+
+logger = make_logger(__name__)
 
 
 @dataclass
@@ -41,8 +51,9 @@ Results = Iterator[Entry]
 
 
 def history(from_paths: InputSource = inputs) -> Results:
+    func = partial(parse_csv_file, parse_function=_parse_text, logger=logger)
     yield from unique_everseen(
-        chain(*map(_parse_file, from_paths())),
+        chain(*map(func, from_paths())),
         key=lambda e: (
             e.dt,
             e.command,
@@ -50,22 +61,16 @@ def history(from_paths: InputSource = inputs) -> Results:
     )
 
 
-def _parse_file(histfile: Path) -> Results:
-    # TODO: helper function to read 'regular' QUOTE_MINIMAL csv files
-    # without failing due to encoding errors?
-    with histfile.open("r", encoding="utf-8", newline="") as f:
-        csv_reader = csv.reader(
-            f, delimiter=",", quotechar='"', quoting=csv.QUOTE_MINIMAL
+def _parse_text(data: str) -> Results:
+    csv_reader = csv.reader(
+        StringIO(data), delimiter=",", quotechar='"', quoting=csv.QUOTE_MINIMAL
+    )
+    for row in csv_reader:
+        yield Entry(
+            dt=parse_datetime_sec(row[0]),
+            command=row[2],
+            directory=None if row[1] == "-" else row[1],
         )
-        try:
-            for row in csv_reader:
-                yield Entry(
-                    dt=parse_datetime_sec(row[0]),
-                    command=row[2],
-                    directory=None if row[1] == "-" else row[1],
-                )
-        except csv.Error as e:
-            print(f"While parsing {histfile}... {e}")
 
 
 def stats() -> Stats:
