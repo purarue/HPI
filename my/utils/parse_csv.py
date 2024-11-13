@@ -2,7 +2,7 @@ import csv
 import logging
 
 from pathlib import Path
-from typing import Callable, Iterator, TypeVar
+from typing import Callable, Iterator, TypeVar, Optional
 
 T = TypeVar("T")
 
@@ -10,7 +10,7 @@ T = TypeVar("T")
 def parse_csv_file(
     histfile: Path,
     parse_function: Callable[[str], Iterator[T]],
-    logger: logging.Logger,
+    logger: Optional[logging.Logger] = None,
 ) -> Iterator[T]:
     """
     Parses a CSV file using parse_function, yield results from that function.
@@ -25,5 +25,6 @@ def parse_csv_file(
             if "\0" not in data:
                 raise RuntimeError(f"Could not parse {histfile}: {e}") from e
             else:
-                logger.warning("Found NUL byte in %s: %s", histfile, e)
+                if logger:
+                    logger.warning("Found NUL byte in %s: %s", histfile, e)
                 yield from parse_function(data.replace("\0", ""))
