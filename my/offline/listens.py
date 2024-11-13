@@ -16,7 +16,6 @@ from offline_listens.parse import iter_dir, parse_file
 
 from dataclasses import dataclass
 from my.core import get_files, Stats, Paths
-from my.utils.input_source import InputSource
 
 
 @dataclass
@@ -32,8 +31,8 @@ def inputs() -> Sequence[Path]:
 Results = Iterator[Listen]
 
 
-def history(from_paths: InputSource = inputs) -> Results:
-    for f in from_paths():
+def history() -> Results:
+    for f in inputs():
         if f.is_dir():
             yield from iter_dir(f)
         else:

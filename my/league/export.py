@@ -24,15 +24,15 @@ from pathlib import Path
 from typing import Iterator, Sequence, Optional
 
 from my.core import get_files, Stats, Res, make_logger
-from my.utils.input_source import InputSource
 
 from lolexport.merge import Game, merge_game_histories
 import lolexport.log as llog
+from logzero import setup_logger  # type: ignore[import]
 
 logger = make_logger(__name__)
 
 # configure logs
-llog.logger = llog.setup_logger(name="lolexport", level=logger.level)
+llog.logger = setup_logger(name="lolexport", level=logger.level)
 
 
 def inputs() -> Sequence[Path]:
@@ -42,11 +42,9 @@ def inputs() -> Sequence[Path]:
 Results = Iterator[Res[Game]]
 
 
-def history(
-    from_paths: InputSource = inputs, summoner_name: Optional[str] = None
-) -> Results:
+def history(summoner_name: Optional[str] = None) -> Results:
     sname = summoner_name or config.username
-    for g in merge_game_histories(list(from_paths()), username=sname):
+    for g in merge_game_histories(list(inputs()), username=sname):
         try:
             g._serialize()  # try parsing the data from this
             yield g

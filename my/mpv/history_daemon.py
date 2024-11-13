@@ -36,7 +36,6 @@ from mpv_history_daemon.events import (
 )
 
 from my.core import get_files, Stats, make_logger
-from my.utils.input_source import InputSource
 
 
 logger = make_logger(__name__)
@@ -89,9 +88,9 @@ def _filter_by(m: Media) -> bool:
     return _actually_listened_to(m, require_listened_to_percent=perc)
 
 
-def all_history(from_paths: InputSource = inputs) -> Results:
-    yield from M_all_history(list(from_paths()))
+def all_history() -> Results:
+    yield from M_all_history(list(inputs()))
 
 
-def history(from_paths: InputSource = inputs) -> Results:
-    yield from filter(_filter_by, all_history(from_paths))
+def history() -> Results:
+    yield from filter(_filter_by, all_history())

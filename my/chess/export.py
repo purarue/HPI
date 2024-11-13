@@ -20,7 +20,6 @@ from more_itertools import unique_everseen
 from dataclasses import dataclass
 from my.core import get_files, Stats, make_logger, Paths
 from my.core.cachew import mcachew
-from my.utils.input_source import InputSource
 
 
 @dataclass
@@ -40,8 +39,8 @@ def inputs() -> Sequence[Path]:
 Results = Iterator[Union[cmodel.ChessDotComGame, lmodel.LichessGame]]
 
 
-def _cachew_depends_on(for_paths: InputSource = inputs) -> List[float]:
-    return [p.stat().st_mtime for p in for_paths()]
+def _cachew_depends_on() -> List[float]:
+    return [p.stat().st_mtime for p in inputs()]
 
 
 def _parse_export_file(p: Path) -> Results:
@@ -55,9 +54,9 @@ def _parse_export_file(p: Path) -> Results:
 
 
 @mcachew(depends_on=_cachew_depends_on, logger=logger)
-def history(from_paths: InputSource = inputs) -> Results:
+def history() -> Results:
     yield from unique_everseen(
-        chain(*(_parse_export_file(p) for p in from_paths())), key=lambda g: g.end_time
+        chain(*(_parse_export_file(p) for p in inputs())), key=lambda g: g.end_time
     )
 
 

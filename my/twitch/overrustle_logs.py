@@ -23,7 +23,6 @@ from my.core import make_logger
 from my.core.cachew import mcachew
 from my.core.common import get_files
 from my.utils.time import parse_datetime_sec
-from my.utils.input_source import InputSource
 
 from .common import Event, Results
 
@@ -34,13 +33,13 @@ def inputs() -> Sequence[Path]:
     return get_files(config.export_path)
 
 
-def _cachew_depends_on(for_paths: InputSource = inputs) -> List[float]:
-    return [p.stat().st_mtime for p in for_paths()]
+def _cachew_depends_on() -> List[float]:
+    return [p.stat().st_mtime for p in inputs()]
 
 
 @mcachew(depends_on=_cachew_depends_on, logger=logger)
-def events(from_paths: InputSource = inputs) -> Results:
-    for file in from_paths():
+def events() -> Results:
+    for file in inputs():
         yield from _parse_json_dump(file)
 
 

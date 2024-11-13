@@ -41,7 +41,6 @@ from more_itertools import unique_everseen
 from IPython.core.history import HistoryAccessor
 
 from my.core import get_files, Stats, make_logger
-from my.utils.input_source import InputSource
 
 logger = make_logger(__name__)
 
@@ -73,9 +72,9 @@ def _live_history() -> Results:
         return
 
 
-def history(from_paths: InputSource = inputs) -> Results:
+def history() -> Results:
     yield from unique_everseen(
-        chain(*(_parse_database(str(p)) for p in from_paths()), _live_history()),
+        chain(*(_parse_database(str(p)) for p in inputs()), _live_history()),
         key=lambda h: (h.command, h.dt),
     )
 

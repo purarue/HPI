@@ -24,7 +24,6 @@ from itertools import groupby
 
 from my.core import get_files, Stats, Res
 from my.utils.time import parse_datetime_sec
-from my.utils.input_source import InputSource
 
 
 def inputs() -> Sequence[Path]:
@@ -64,9 +63,9 @@ Results = Iterator[Res[Game]]
 AchievementResults = Iterator[Res[Achievement]]
 
 
-def games(from_paths: InputSource = inputs) -> Results:
+def games() -> Results:
     """only ones I've played"""
-    for game in all_games(from_paths):
+    for game in all_games():
         if isinstance(game, Exception):
             yield game
         else:
@@ -74,10 +73,10 @@ def games(from_paths: InputSource = inputs) -> Results:
                 yield game
 
 
-def all_games(from_paths: InputSource = inputs) -> Results:
+def all_games() -> Results:
     # combine the results from multiple files
     games_no_exc: List[Game] = []
-    for json_file in from_paths():
+    for json_file in inputs():
         for g in _read_parsed_json(json_file):
             if isinstance(g, Exception):
                 yield g
@@ -90,9 +89,9 @@ def all_games(from_paths: InputSource = inputs) -> Results:
         yield max(gm, key=lambda gmo: gmo.achieved)
 
 
-def all_achievements(from_paths: InputSource = inputs) -> AchievementResults:
+def all_achievements() -> AchievementResults:
     # combine the results from multiple achievement lists
-    for game in all_games(from_paths):
+    for game in all_games():
         if isinstance(game, Exception):
             yield game
         else:
@@ -100,8 +99,8 @@ def all_achievements(from_paths: InputSource = inputs) -> AchievementResults:
 
 
 # only ones which Ive actually achieved
-def achievements(from_paths: InputSource = inputs) -> AchievementResults:
-    for ach in all_achievements(from_paths):
+def achievements() -> AchievementResults:
+    for ach in all_achievements():
         if isinstance(ach, Exception):
             yield ach
         else:

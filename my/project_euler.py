@@ -33,7 +33,6 @@ from typing import Sequence, Iterator, NamedTuple, Optional, List, Dict
 from itertools import chain, groupby
 
 from my.core import get_files, Stats
-from my.utils.input_source import InputSource
 
 
 class Solution(NamedTuple):
@@ -42,14 +41,14 @@ class Solution(NamedTuple):
     name: Optional[str]
 
 
-def project_euler_inputs() -> Sequence[Path]:
+def inputs() -> Sequence[Path]:
     return get_files(config.export_path)
 
 
-def history(from_paths: InputSource = project_euler_inputs) -> Iterator[Solution]:
+def history() -> Iterator[Solution]:
     # need to sort here to dedupe accurately
     items: List[Solution] = sorted(
-        chain(*map(_parse_file, from_paths())), key=lambda s: s.problem
+        chain(*map(_parse_file, inputs())), key=lambda s: s.problem
     )
     # group by items, and if there are multiple return the one with the name
     # (or None if there is no name)

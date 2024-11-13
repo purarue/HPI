@@ -23,7 +23,6 @@ from more_itertools import unique_everseen
 from dataclasses import dataclass
 from my.core import get_files, Stats, Paths, make_logger
 from my.utils.time import parse_datetime_sec
-from my.utils.input_source import InputSource
 from my.utils.parse_csv import parse_csv_file
 
 logger = make_logger(__name__)
@@ -50,10 +49,10 @@ class Entry(NamedTuple):
 Results = Iterator[Entry]
 
 
-def history(from_paths: InputSource = inputs) -> Results:
+def history() -> Results:
     func = partial(parse_csv_file, parse_function=_parse_text, logger=logger)
     yield from unique_everseen(
-        chain(*map(func, from_paths())),
+        chain(*map(func, inputs())),
         key=lambda e: (
             e.dt,
             e.command,

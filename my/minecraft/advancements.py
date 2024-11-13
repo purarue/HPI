@@ -26,7 +26,6 @@ from itertools import chain
 
 from my.core import get_files, Stats
 from my.core.structure import match_structure
-from my.utils.input_source import InputSource
 
 from more_itertools import unique_everseen
 
@@ -59,8 +58,8 @@ class Advancement(NamedTuple):
 Results = Iterator[Advancement]
 
 
-def advancements(for_worlds: InputSource = worlds) -> Results:
-    yield from unique_everseen(chain(*map(_parse_world, for_worlds())))
+def advancements() -> Results:
+    yield from unique_everseen(chain(*map(_parse_world, worlds())))
 
 
 DATE_REGEX = r"%Y-%m-%d %H:%M:%S %z"

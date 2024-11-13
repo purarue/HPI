@@ -24,7 +24,6 @@ from itertools import chain
 
 from my.core import get_files, Stats
 from my.utils.time import parse_datetime_sec
-from my.utils.input_source import InputSource
 
 
 logger = make_logger(__name__)
@@ -34,8 +33,8 @@ def inputs() -> Sequence[Path]:
     return get_files(config.export_path)
 
 
-def _cachew_depends_on(for_paths: InputSource = inputs) -> List[float]:
-    return [p.stat().st_mtime for p in for_paths()]
+def _cachew_depends_on() -> List[float]:
+    return [p.stat().st_mtime for p in inputs()]
 
 
 class Event(NamedTuple):
@@ -48,8 +47,8 @@ Results = Iterator[Event]
 
 
 @mcachew(depends_on=_cachew_depends_on, logger=logger)
-def events(from_paths: InputSource = inputs) -> Results:
-    yield from chain(*map(_parse_json_file, from_paths()))
+def events() -> Results:
+    yield from chain(*map(_parse_json_file, inputs()))
 
 
 def _parse_json_file(p: Path) -> Results:

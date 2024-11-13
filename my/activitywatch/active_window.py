@@ -18,7 +18,6 @@ from itertools import chain
 
 from dataclasses import dataclass
 from my.core import get_files, Stats, Paths, make_logger, make_config
-from my.utils.input_source import InputSource
 
 from more_itertools import unique_everseen
 
@@ -45,7 +44,7 @@ def inputs() -> Sequence[Path]:
     return get_files(config.export_path)
 
 
-def history(from_paths: InputSource = inputs) -> Results:
+def history() -> Results:
     yield from unique_everseen(
         chain(
             *map(
@@ -54,7 +53,7 @@ def history(from_paths: InputSource = inputs) -> Results:
                     logger=logger,
                     error_policy=config.error_policy,
                 ),
-                from_paths(),
+                inputs(),
             )
         ),
         key=lambda e: e.timestamp,

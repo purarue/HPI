@@ -40,7 +40,6 @@ from my.core import (
 from my.core.cachew import mcachew
 from my.core.warnings import low
 from my.utils.time import parse_datetime_sec
-from my.utils.input_source import InputSource
 
 from more_itertools import unique_everseen
 
@@ -90,27 +89,23 @@ class Entry(NamedTuple):
 Results = Iterator[Entry]
 
 
-def history(from_paths: InputSource = backup_inputs) -> Results:
-    # if user has specified some other function as input
-    if hash(from_paths) != hash(backup_inputs):
-        yield from _merge_histories(*map(_parse_file, from_paths()))
-        return
+def history() -> Results:
     lf = _live_file()
     if lf is not None:
-        yield from _merge_histories(_history_from_backups(from_paths), _parse_file(lf))
+        yield from _merge_histories(_history_from_backups(), _parse_file(lf))
     else:
         # if we're not merging the live history file
         # dont need to spend the time doing the additional _merge_histories
-        yield from _history_from_backups(from_paths)
+        yield from _history_from_backups()
 
 
-def _depends_on(p: InputSource) -> Sequence[Path]:
-    return sorted(p())
+def _cachew_depends_on() -> Sequence[Path]:
+    return sorted(backup_inputs())
 
 
-@mcachew(depends_on=_depends_on, logger=logger)
-def _history_from_backups(from_paths: InputSource) -> Results:
-    yield from _merge_histories(*map(_parse_file, from_paths()))
+@mcachew(depends_on=_cachew_depends_on, logger=logger)
+def _history_from_backups() -> Results:
+    yield from _merge_histories(*map(_parse_file, backup_inputs()))
 
 
 @warn_if_empty

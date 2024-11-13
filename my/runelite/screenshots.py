@@ -26,7 +26,6 @@ from datetime import datetime
 
 from my.core import get_files, Stats
 from my.core.structure import match_structure
-from my.utils.input_source import InputSource
 
 EXPECTED = ("Levels", "Quests")
 
@@ -60,11 +59,11 @@ class Screenshot(NamedTuple):
 Results = Iterator[Screenshot]
 
 
-def screenshots(for_accounts: InputSource = accounts) -> Results:
-    for account in for_accounts():
-        for p in account.iterdir():
+def screenshots() -> Results:
+    for acc in accounts():
+        for p in acc.iterdir():
             if p.is_dir():
-                yield from _parse_subdir(p, username=account.stem)
+                yield from _parse_subdir(p, username=acc.stem)
 
 
 DT_REGEX = r"%Y-%m-%d_%H-%M-%S"

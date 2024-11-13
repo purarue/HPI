@@ -37,7 +37,6 @@ from dataclasses import dataclass
 from my.core import get_files, Stats, make_logger, Paths
 from my.core.cachew import mcachew
 from my.utils.time import parse_datetime_sec
-from my.utils.input_source import InputSource
 
 
 @dataclass
@@ -62,14 +61,14 @@ class Entry(NamedTuple):
 Results = Iterator[Entry]
 
 
-def _cachew_depends_on(for_paths: InputSource = inputs) -> List[float]:
-    return [p.stat().st_mtime for p in for_paths()]
+def _cachew_depends_on() -> List[float]:
+    return [p.stat().st_mtime for p in inputs()]
 
 
 @mcachew(depends_on=_cachew_depends_on, logger=logger)
-def history(from_paths: InputSource = inputs) -> Results:
+def history() -> Results:
     yield from unique_everseen(
-        chain(*map(_parse_file, from_paths())),
+        chain(*map(_parse_file, inputs())),
         key=lambda h: (
             h.dt,
             h.command,

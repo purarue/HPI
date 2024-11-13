@@ -31,7 +31,6 @@ from itertools import chain
 import dateparser
 
 from my.core import get_files, make_logger
-from my.utils.input_source import InputSource
 
 logger = make_logger(__name__)
 
@@ -43,8 +42,8 @@ def inputs() -> Sequence[Path]:
     return get_files(config.export_path)
 
 
-def timestamps(from_paths: InputSource = inputs) -> Results:
-    yield from chain(*map(_parse_file, from_paths()))
+def timestamps() -> Results:
+    yield from chain(*map(_parse_file, inputs()))
 
 
 def _parse_file(post_file: Path) -> Results:

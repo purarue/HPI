@@ -1,3 +1,7 @@
+### 2024-10-13
+
+Removed the `my.utils.input_source` code, it doesn't work great with cachew, or in general (passing a custom function didn't always invalidate caching).
+
 ### 2022-03-20
 
 See [#33](https://github.com/purarue/HPI/pull/33)

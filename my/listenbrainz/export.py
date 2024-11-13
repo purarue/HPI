@@ -18,7 +18,6 @@ from more_itertools import unique_everseen
 
 from dataclasses import dataclass
 from my.core import get_files, Stats, make_logger, Paths
-from my.utils.input_source import InputSource
 
 
 @dataclass
@@ -43,9 +42,9 @@ def _parse_export_file(p: Path) -> Results:
     yield from filter(lambda lst: lst.listened_at is not None, iter_listens(p))
 
 
-def history(from_paths: InputSource = inputs) -> Results:
+def history() -> Results:
     yield from unique_everseen(
-        chain(*(_parse_export_file(p) for p in from_paths())),
+        chain(*(_parse_export_file(p) for p in inputs())),
         key=lambda lst: lst.listened_at,
     )
 
