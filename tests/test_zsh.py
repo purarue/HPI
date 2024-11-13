@@ -1,11 +1,17 @@
 from pathlib import Path
+from typing import Callable, Iterator
+from itertools import chain
 
-from my.zsh import history, Entry
+from my.zsh import _parse_file, _merge_histories, Entry
 
 from .common import data
 
 history_file = data("zsh/zsh_history")
 overlap_file = data("zsh/overlap_history")
+
+
+def _parse_and_merge(inputs: Callable[[], Iterator[Path]]) -> Iterator[Entry]:
+    yield from _merge_histories(*chain(map(_parse_file, inputs())))
 
 
 def test_single_file() -> None:
@@ -16,7 +22,7 @@ def test_single_file() -> None:
     def zsh_small_test():
         yield Path(history_file)
 
-    items = list(history(from_paths=zsh_small_test))
+    items = list(_parse_and_merge(inputs=zsh_small_test))
     assert len(items) == 11
 
     from datetime import datetime, timezone
@@ -47,5 +53,5 @@ def test_overlap() -> None:
         yield Path(history_file)
         yield Path(overlap_file)
 
-    items = list(history(from_paths=zsh_multiple_tests))
+    items = list(_parse_and_merge(inputs=zsh_multiple_tests))
     assert len(items) == 11
