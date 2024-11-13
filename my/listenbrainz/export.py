@@ -40,7 +40,7 @@ Results = Iterator[Listen]
 def _parse_export_file(p: Path) -> Results:
     # remove any items which have null as listen date
     # (may have been listening to something when export happened)
-    yield from filter(lambda lst: lst.listened_at is not None, iter_listens(str(p)))
+    yield from filter(lambda lst: lst.listened_at is not None, iter_listens(p))
 
 
 def history(from_paths: InputSource = inputs) -> Results:
