@@ -10,7 +10,7 @@ It's a Python library (named `my`), a collection of modules for:
 
 [_Why?_](https://github.com/karlicoss/HPI#why)
 
-This is built on top of [`karlicoss/HPI`](https://github.com/karlicoss/HPI). It started out as a fork, but has since been converted to my own set of modules. This is installed alongside the upstream repository (meaning _you can use both modules from upstream and here simultaneously_), see [#install](#install)
+This is built on top of [`karlicoss/HPI`](https://github.com/karlicoss/HPI). These are all additional modules which aren't present in that repository - this is installed alongside the upstream repository (meaning _you can use both modules from upstream and here simultaneously_), see [#install](#install)
 
 ### My Modules
 
