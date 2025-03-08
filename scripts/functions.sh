@@ -42,10 +42,12 @@ mpv-recent() {
 mpv-recent-path() {
 	mpv-recent "$1" | jq -r .path
 }
-alias replay='mpv-recent-path 1 | mpv-from-stdin'
+replay() {
+	mpv-recent-path | exists | grep --max-count=1 "$XDG_MUSIC_DIR" | mpv-from-stdin
+}
 # requires https://github.com/purarue/exists, https://github.com/purarue/pura-utils
 replay-recent() {
-	mpv-recent-path "$1" | exists | head -n "${1:-$LINES}" | unique | fzf | mpv-from-stdin
+	mpv-recent-path "$1" | exists | unique | head -n "${1:-$LINES}" | fzf --select-1 | mpv-from-stdin
 }
 
 ##########
