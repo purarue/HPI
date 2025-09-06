@@ -140,14 +140,14 @@ setup_fork() {
 	cd "${UPSTREAM_DIR}" || return $?
 
 	if ci; then
-		pip_install -e '.[optional,testing]' || return $?
+		pip_install --use-pep517 -e '.[optional,testing]' || return $?
 	else
-		pip_install -e '.' || return $?
+		pip_install --use-pep517 -e '.' || return $?
 	fi
 
 	# cd back to here, to install this
 	cd "${BASE_DIR}" || return $?
-	pip_install -e '.' || return $?
+	pip_install --use-pep517 -e '.' || return $?
 }
 
 module_dependencies() {
