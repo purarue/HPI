@@ -140,7 +140,7 @@ setup_fork() {
 	cd "${UPSTREAM_DIR}" || return $?
 
 	if ci; then
-		pip_install --use-pep517 -e '.[optional,testing]' || return $?
+		pip_install --use-pep517 --group testing -e '.[optional]' || return $?
 	else
 		pip_install --use-pep517 -e '.' || return $?
 	fi
