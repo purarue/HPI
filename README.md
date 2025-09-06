@@ -177,11 +177,15 @@ python3 -m pip install --user -e ./HPI-pura
 
 Editable install means any changes to python files reflect immediately, which is very convenient for debugging and developing new modules. To update, you can just `git pull` in those directories.
 
-If you care about [overriding modules](https://github.com/purarue/HPI#partially-in-usewith-overrides), to make sure your `easy-install.pth` is ordered correctly:
+If you care about [overriding modules](https://github.com/purarue/HPI#partially-in-usewith-overrides), create a `__init__.py` with a `__path__`, the first item being the path to your configuration, and then the repositories you want items to prioritize first. As an example, see [my `__init__.py` in my personal repository](https://github.com/purarue/HPI-personal/blob/master/my/__init__.py), which looks something like:
 
 ```bash
-python3 -m pip install --user reorder_editable
-python3 -m reorder_editable reorder ./HPI-pura ./HPI-karlicoss
+__path__[:] = [
+    "/home/user/.config/my/my",
+    "/home/user/Repos/HPI-personal/my",  # these have modules which override modules below
+    "/home/user/Repos/HPI/my",
+    "/home/user/Repos/HPI-karlicoss/src/my",
+]
 ```
 
 Then, you likely need to run `hpi module install` for any modules you plan on using -- this can be done incrementally as you setup new modules. E.g.:
