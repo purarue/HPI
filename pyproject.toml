@@ -29,18 +29,18 @@ backup_to = "my.utils.backup_to.__main__:main"
 Homepage = "https://github.com/purarue/HPI"
 
 [tool.mypy]
-pretty = "True"
-show_error_context = "True"
-show_error_codes = "True"
-check_untyped_defs = "True"
-namespace_packages = "True"
-disallow_incomplete_defs = "True"
-no_implicit_optional = "True"
-disallow_any_generics = "True"
-disallow_untyped_calls = "True"
-warn_redundant_casts = "True"
-warn_return_any = "True"
-warn_unreachable = "True"
+pretty = true
+show_error_context = true
+show_error_codes = true
+check_untyped_defs = true
+namespace_packages = true
+disallow_incomplete_defs = true
+no_implicit_optional = true
+disallow_any_generics = true
+disallow_untyped_calls = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unreachable = true
 
 [tool.pytest.ini_options]
 addopts = "--verbose tests"
