@@ -1,0 +1,52 @@
+[project]
+name = "HPI_purarue"
+version = "0.0.1"
+description = "A Python interface to my life"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+classifiers = [
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+[[project.authors]]
+name = "purarue"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+backup_to = "my.utils.backup_to.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/purarue/HPI"
+
+[tool.mypy]
+pretty = "True"
+show_error_context = "True"
+show_error_codes = "True"
+check_untyped_defs = "True"
+namespace_packages = "True"
+disallow_incomplete_defs = "True"
+no_implicit_optional = "True"
+disallow_any_generics = "True"
+disallow_untyped_calls = "True"
+warn_redundant_casts = "True"
+warn_return_any = "True"
+warn_unreachable = "True"
+
+[tool.pytest.ini_options]
+addopts = "--verbose tests"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["my*"]
+exclude = []
+namespaces = true
