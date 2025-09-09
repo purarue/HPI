@@ -3,7 +3,7 @@ Discord Data: messages and events data
 """
 
 REQUIRES = [
-    "git+https://github.com/purarue/discord_data",
+    "discord_data>=0.2.3",
     "urlextract",
 ]
 
@@ -40,6 +40,7 @@ from datetime import datetime
 from my.core import make_logger, Stats, get_files
 from my.core.structure import match_structure
 from discord_data.parse import parse_messages, parse_activity
+from discord_data.merge import MESSAGES_DIRS, ACTIVITY_DIRS
 from discord_data.model import Activity, Message
 from urlextract import URLExtract  # type: ignore[import]
 
@@ -125,7 +126,12 @@ def _cachew_depends_on() -> List[str]:
     return [str(p) for p in get_files(config.export_path)]
 
 
-EXPECTED_DISCORD_STRUCTURE = ("messages/index.json", "account/user.json")
+EXPECTED_DISCORD_STRUCTURE = (
+    "messages/index.json",
+    "Messages/index.json",
+    "account/user.json",
+    "Account/user.json",
+)
 
 
 def get_discord_exports() -> Iterator[Path]:
@@ -136,7 +142,7 @@ def get_discord_exports() -> Iterator[Path]:
             yield exp
             continue
         with match_structure(
-            exp, expected=EXPECTED_DISCORD_STRUCTURE
+            exp, expected=EXPECTED_DISCORD_STRUCTURE, partial=True
         ) as discord_export:
             yield from discord_export
 
@@ -145,36 +151,52 @@ def get_discord_exports() -> Iterator[Path]:
 def messages() -> Iterator[Message]:
     emitted: Set[int] = set()
     for discord_export in get_discord_exports():
-        message_dir = discord_export / "messages"
-        for msg in parse_messages(message_dir):
-            if isinstance(msg, Exception):
-                logger.warning(msg)
-                continue
-            if msg.message_id in emitted:
-                continue
-            yield Message(
-                message_id=msg.message_id,
-                timestamp=msg.timestamp,
-                channel=msg.channel,
-                content=_remove_link_suppression(msg.content),
-                attachments=msg.attachments,
+        possible_dirs = [discord_export / dname for dname in MESSAGES_DIRS]
+        found = [d for d in possible_dirs if d.exists()]
+        if not found:
+            logger.warning(
+                f"Did not find any message directories at {possible_dirs} for {discord_export}, skipping..."
             )
-            emitted.add(msg.message_id)
+            continue
+        for message_dir in found:
+            if not message_dir.exists():
+                continue
+            for msg in parse_messages(message_dir):
+                if isinstance(msg, Exception):
+                    logger.warning(msg)
+                    continue
+                if msg.message_id in emitted:
+                    continue
+                yield Message(
+                    message_id=msg.message_id,
+                    timestamp=msg.timestamp,
+                    channel=msg.channel,
+                    content=_remove_link_suppression(msg.content),
+                    attachments=msg.attachments,
+                )
+                emitted.add(msg.message_id)
 
 
 @mcachew(depends_on=_cachew_depends_on, logger=logger)
 def activity() -> Iterator[Activity]:
     emitted: Set[str] = set()
     for discord_export in get_discord_exports():
-        activity_dir = discord_export / "activity"
-        for act in parse_activity(activity_dir):
-            if isinstance(act, Exception):
-                logger.warning(act)
-                continue
-            if act.event_id in emitted:
-                continue
-            yield act
-            emitted.add(act.event_id)
+        possible_dirs = [discord_export / dname for dname in ACTIVITY_DIRS]
+        found = [d for d in possible_dirs if d.exists()]
+        if not found:
+            logger.warning(
+                f"Did not find any activity directories at {possible_dirs} for {discord_export}, skipping..."
+            )
+            continue
+        for activity_dir in found:
+            for act in parse_activity(activity_dir):
+                if isinstance(act, Exception):
+                    logger.warning(act)
+                    continue
+                if act.event_id in emitted:
+                    continue
+                yield act
+                emitted.add(act.event_id)
 
 
 class Reaction(NamedTuple):
