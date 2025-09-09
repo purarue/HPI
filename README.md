@@ -77,6 +77,8 @@ I also have some more personal scripts/modules in a separate repo; [`HPI-persona
 
 Since I've mangled my `PYTHONPATH` (see [reorder_editable](https://github.com/purarue/reorder_editable#editable-namespace-packages)), it imports from my repo instead of `karlicoss/HPI`. `all.py` files tend to pretty small -- so overriding/changing a line to add a source is the whole point.
 
+See [here](https://github.com/purarue/reorder_editable#custom-editablepth-files) for an explanation of how that works.
+
 ### Companion Tools/Libraries
 
 Disregarding tools which actively collect data (like [`ttt`](https://github.com/purarue/ttt)/[`window_watcher`](https://github.com/purarue/aw-watcher-window)) or repositories which have their own exporter/parsers which are used here, there are a couple other tools/libraries I've created for this project:
