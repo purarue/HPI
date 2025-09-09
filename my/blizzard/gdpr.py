@@ -19,7 +19,8 @@ class config(user_config.gdpr):
 import json
 from pathlib import Path
 from datetime import datetime
-from typing import NamedTuple, Iterator, Sequence, List
+from typing import NamedTuple
+from collections.abc import Iterator, Sequence
 from itertools import chain
 
 from my.core import get_files, Stats
@@ -33,14 +34,14 @@ def inputs() -> Sequence[Path]:
     return get_files(config.export_path)
 
 
-def _cachew_depends_on() -> List[float]:
+def _cachew_depends_on() -> list[float]:
     return [p.stat().st_mtime for p in inputs()]
 
 
 class Event(NamedTuple):
     dt: datetime
     event_tag: str
-    metadata: List[str]
+    metadata: list[str]
 
 
 Results = Iterator[Event]

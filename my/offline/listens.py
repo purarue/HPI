@@ -9,7 +9,7 @@ from my.config import offline as user_config  # type: ignore[attr-defined]
 
 
 from pathlib import Path
-from typing import Iterator, Sequence
+from collections.abc import Iterator, Sequence
 
 from offline_listens.listens import Listen
 from offline_listens.parse import iter_dir, parse_file

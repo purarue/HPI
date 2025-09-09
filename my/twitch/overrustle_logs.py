@@ -17,7 +17,7 @@ class config(user_config.overrustle):
 
 import json
 from pathlib import Path
-from typing import Sequence, List
+from collections.abc import Sequence
 
 from my.core import make_logger
 from my.core.cachew import mcachew
@@ -33,7 +33,7 @@ def inputs() -> Sequence[Path]:
     return get_files(config.export_path)
 
 
-def _cachew_depends_on() -> List[float]:
+def _cachew_depends_on() -> list[float]:
     return [p.stat().st_mtime for p in inputs()]
 
 

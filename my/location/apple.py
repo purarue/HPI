@@ -1,4 +1,4 @@
-from typing import Iterator
+from collections.abc import Iterator
 
 from my.core.source import import_source
 from my.location.common import Location  # type: ignore[import]

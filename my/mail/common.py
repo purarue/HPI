@@ -2,16 +2,13 @@ import logging
 from pathlib import Path
 from email.message import Message
 from typing import (
-    List,
-    Tuple,
     TextIO,
-    Iterator,
     Optional,
     Union,
-    Dict,
     Any,
     cast,
 )
+from collections.abc import Iterator
 from datetime import datetime
 from dataclasses import dataclass
 
@@ -85,7 +82,7 @@ class Email(MailParser):
                 return self._dt
         return None
 
-    def _serialize(self) -> Dict[str, Any]:
+    def _serialize(self) -> dict[str, Any]:
         return {
             "filepath": self.filepath,
             "bcc": self.bcc,
@@ -202,7 +199,7 @@ def try_decode_buf(buf: bytes) -> str:
             return buf.decode("latin-1")
 
 
-def describe_person(p: Tuple[str, str]) -> str:
+def describe_person(p: tuple[str, str]) -> str:
     """
     (
         "Person",
@@ -220,7 +217,7 @@ def describe_person(p: Tuple[str, str]) -> str:
         return p[1]
 
 
-def describe_persons(m: List[Tuple[str, str]]) -> str:
+def describe_persons(m: list[tuple[str, str]]) -> str:
     """
     >>> [('Google', 'no-reply@accounts.google.com'), ('Github', 'no-reply@github.com')]
     'Google <no-reply@accounts.google.com>, Github <no-reply@github.com>'

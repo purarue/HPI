@@ -20,7 +20,7 @@ class scramble_config(user_config.history):
 
 config = make_config(scramble_config)
 
-from typing import Iterator
+from collections.abc import Iterator
 
 from scramble_history.__main__ import (
     scramble_history_config_dir,

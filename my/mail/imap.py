@@ -11,11 +11,10 @@ from my.config import mail as user_config  # type: ignore[attr-defined]
 
 from pathlib import Path
 from typing import (
-    Iterator,
     Callable,
     Optional,
-    List,
 )
+from collections.abc import Iterator
 
 
 from dataclasses import dataclass
@@ -35,7 +34,7 @@ class imap_conf(user_config.imap):
 config = make_config(imap_conf)
 
 
-def mailboxes() -> List[Path]:
+def mailboxes() -> list[Path]:
     return list(get_files(config.mailboxes))
 
 

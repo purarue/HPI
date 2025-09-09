@@ -15,7 +15,7 @@ from my.config import todotxt as user_config  # type: ignore[attr-defined]
 
 from pathlib import Path
 from datetime import datetime, timezone
-from typing import Iterator
+from collections.abc import Iterator
 
 from git_doc_history import DocHistory, parse_snapshot_diffs, Action
 

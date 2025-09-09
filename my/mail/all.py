@@ -1,4 +1,4 @@
-from typing import Iterator
+from collections.abc import Iterator
 from itertools import chain
 
 from my.core import Stats

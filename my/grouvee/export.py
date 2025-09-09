@@ -8,7 +8,7 @@ REQUIRES = ["git+https://github.com/purarue/grouvee_export"]
 from my.config import grouvee as user_config  # type: ignore[attr-defined]
 
 from pathlib import Path
-from typing import Iterator, List
+from collections.abc import Iterator
 from functools import lru_cache
 
 from more_itertools import last
@@ -31,7 +31,7 @@ def _latest_input() -> Path:
 
 # should typically only parse the latest dump
 @lru_cache(maxsize=None)
-def _read_grouvee_export(p: Path) -> List[G.Game]:
+def _read_grouvee_export(p: Path) -> list[G.Game]:
     return list(G.parse_export(p))
 
 

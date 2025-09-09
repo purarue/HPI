@@ -1,5 +1,6 @@
 from datetime import datetime
-from typing import NamedTuple, Union, Iterator
+from typing import NamedTuple, Union
+from collections.abc import Iterator
 
 from my.core import __NOT_HPI_MODULE__  # noqa: F401
 

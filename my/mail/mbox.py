@@ -9,7 +9,8 @@ from my.config import mail as user_config  # type: ignore[attr-defined]
 
 import mailbox
 from pathlib import Path
-from typing import List, Iterator, Optional, Sequence, IO, Any
+from typing import Optional, IO, Any
+from collections.abc import Iterator, Sequence
 
 from dataclasses import dataclass
 from my.core import Stats, Paths, get_files
@@ -30,7 +31,7 @@ class config(user_config.mbox):
     exclude_extensions: Optional[Sequence[str]] = None
 
 
-def mailboxes() -> List[Path]:
+def mailboxes() -> list[Path]:
     return list(get_files(config.mailboxes))
 
 

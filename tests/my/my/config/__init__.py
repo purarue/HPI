@@ -4,7 +4,8 @@ Config file used for testing in CI; so that config is defined
 
 import tempfile
 from pathlib import Path
-from typing import Optional, Sequence, Callable
+from typing import Optional, Callable
+from collections.abc import Sequence
 
 from os import environ, path
 

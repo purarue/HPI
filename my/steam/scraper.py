@@ -19,7 +19,8 @@ import json
 from functools import partial
 from pathlib import Path
 from datetime import datetime
-from typing import NamedTuple, Iterator, Sequence, Dict, List, Optional, Any
+from typing import NamedTuple, Optional, Any
+from collections.abc import Iterator, Sequence
 from itertools import groupby
 
 from my.core import get_files, Stats, Res
@@ -43,7 +44,7 @@ class Game(NamedTuple):
     id: int
     name: str
     hours_played: float
-    achievements: List[Achievement]
+    achievements: list[Achievement]
     image_url: Optional[str]
 
     @property
@@ -75,7 +76,7 @@ def games() -> Results:
 
 def all_games() -> Results:
     # combine the results from multiple files
-    games_no_exc: List[Game] = []
+    games_no_exc: list[Game] = []
     for json_file in inputs():
         for g in _read_parsed_json(json_file):
             if isinstance(g, Exception):
@@ -125,7 +126,7 @@ def _read_parsed_json(p: Path) -> Results:
             yield e
 
 
-def _parse_achievement(ach: Dict[str, Any], game_name: str) -> Achievement:
+def _parse_achievement(ach: dict[str, Any], game_name: str) -> Achievement:
     achieved = ach["progress"]["unlocked"]
     achieved_on = None
     # parse datetime if it has it

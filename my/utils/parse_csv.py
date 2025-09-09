@@ -2,7 +2,8 @@ import csv
 import logging
 
 from pathlib import Path
-from typing import Callable, Iterator, TypeVar, Optional
+from typing import Callable, TypeVar, Optional
+from collections.abc import Iterator
 
 T = TypeVar("T")
 

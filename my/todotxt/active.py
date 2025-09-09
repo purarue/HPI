@@ -10,10 +10,7 @@ from my.config import todotxt as user_config  # type: ignore[attr-defined]
 
 
 from pathlib import Path
-from typing import (
-    Tuple,
-    Iterator,
-)
+from collections.abc import Iterator
 
 from dataclasses import dataclass
 from my.core import Stats, PathIsh
@@ -27,7 +24,7 @@ class config(user_config.active):
     export_path: PathIsh
 
 
-def inputs() -> Tuple[Path, Path]:
+def inputs() -> tuple[Path, Path]:
     p = Path(config.export_path).expanduser().absolute()
     if not p.exists():
         raise FileNotFoundError(f"todotxt export path {p} doesn't exist")

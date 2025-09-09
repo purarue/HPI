@@ -11,10 +11,7 @@ from my.config import rss as user_config  # type: ignore[attr-defined]
 
 from pathlib import Path
 from datetime import datetime
-from typing import (
-    Iterator,
-    List,
-)
+from collections.abc import Iterator
 
 from git_doc_history import (
     DocHistory,
@@ -45,7 +42,7 @@ def input() -> DocHistory:
 Results = Iterator[str]
 
 
-def _parse_buffer(buf: bytes) -> List[str]:
+def _parse_buffer(buf: bytes) -> list[str]:
     return buf.decode("utf-8").strip().splitlines()
 
 

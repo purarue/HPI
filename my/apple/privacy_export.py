@@ -21,7 +21,8 @@ import os
 import json
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Iterator, Dict, Any, NamedTuple, Union, Optional, Sequence
+from typing import Any, NamedTuple, Union, Optional
+from collections.abc import Iterator, Sequence
 
 from lxml import etree  # type: ignore[import]
 from lxml.etree import _Element
@@ -160,7 +161,7 @@ def _parse_game_center(
 def _parse_locations(f: Path) -> Iterator[Location]:
     tr = etree.parse(str(f))
     for location in _parse_apple_xml_val(tr.find("array")):
-        loc_data: Dict[str, Any] = first(list(location.values()))
+        loc_data: dict[str, Any] = first(list(location.values()))
         if "t" in loc_data:
             for tstamp in loc_data["t"]:
                 yield Location(
@@ -175,7 +176,7 @@ def _parse_locations(f: Path) -> Iterator[Location]:
 def _parse_calendar_recents(f: Path) -> Iterator[Location]:
     tr = etree.parse(str(f))
     for location in _parse_apple_xml_val(tr.find("array")):
-        loc_data: Dict[str, Any] = first(list(location.values()))
+        loc_data: dict[str, Any] = first(list(location.values()))
         if "map location" in loc_data:
             if "t" in loc_data:
                 for tstamp in loc_data["t"]:

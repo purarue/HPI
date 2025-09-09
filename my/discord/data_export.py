@@ -9,7 +9,6 @@ REQUIRES = [
 
 
 from pathlib import Path
-from typing import List
 from dataclasses import dataclass
 
 from my.config import discord as user_config  # type: ignore[attr-defined]
@@ -34,7 +33,8 @@ class discord_config(user_config.data_export):
 config = make_config(discord_config)
 
 
-from typing import Iterator, Optional, Tuple, Set, NamedTuple
+from typing import Optional, NamedTuple
+from collections.abc import Iterator
 from datetime import datetime
 
 from my.core import make_logger, Stats, get_files
@@ -64,7 +64,7 @@ extractor = URLExtract()
 
 
 def _remove_link_suppression(
-    content: str, *, urls: Optional[List[Tuple[str, Tuple[int, int]]]] = None
+    content: str, *, urls: Optional[list[tuple[str, tuple[int, int]]]] = None
 ) -> str:
     # fix content to remove discord link suppression if any links had any
     # e.g. this is a suppressed link <https://github.com>
@@ -122,7 +122,7 @@ def test_remove_link_suppression() -> None:
     assert _remove_link_suppression(content) == expected
 
 
-def _cachew_depends_on() -> List[str]:
+def _cachew_depends_on() -> list[str]:
     return [str(p) for p in get_files(config.export_path)]
 
 
@@ -149,7 +149,7 @@ def get_discord_exports() -> Iterator[Path]:
 
 @mcachew(depends_on=_cachew_depends_on, logger=logger)
 def messages() -> Iterator[Message]:
-    emitted: Set[int] = set()
+    emitted: set[int] = set()
     for discord_export in get_discord_exports():
         possible_dirs = [discord_export / dname for dname in MESSAGES_DIRS]
         found = [d for d in possible_dirs if d.exists()]
@@ -179,7 +179,7 @@ def messages() -> Iterator[Message]:
 
 @mcachew(depends_on=_cachew_depends_on, logger=logger)
 def activity() -> Iterator[Activity]:
-    emitted: Set[str] = set()
+    emitted: set[str] = set()
     for discord_export in get_discord_exports():
         possible_dirs = [discord_export / dname for dname in ACTIVITY_DIRS]
         found = [d for d in possible_dirs if d.exists()]

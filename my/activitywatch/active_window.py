@@ -12,7 +12,8 @@ REQUIRES = [
 from my.config import activitywatch as user_config  # type: ignore[attr-defined]
 
 from pathlib import Path
-from typing import Iterator, Sequence, Union
+from typing import Union
+from collections.abc import Iterator, Sequence
 from functools import partial
 from itertools import chain
 

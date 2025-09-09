@@ -2,7 +2,8 @@
 Some helper functions/constants for parsing message subparts/ignoring certain content types
 """
 
-from typing import Iterator, Tuple, Set, Union, Any, Literal
+from typing import Union, Any, Literal
+from collections.abc import Iterator
 from email.message import Message
 
 # explicitly ignored types, anything else sends a warning
@@ -23,7 +24,7 @@ IGNORED_CONTENT_TYPES = {
     "multipart/parallel",  # not sure what the best way to parse this is
 }
 
-IGNORED_CONTENT_PREFIXES: Set[str] = {
+IGNORED_CONTENT_PREFIXES: set[str] = {
     "application/vnd",
     "application/x-apple",
     "application/x-iwork",
@@ -51,7 +52,7 @@ EmailTextOrContentType = Union[EmailText, str]
 
 def tag_message_subparts(
     msg: Message,
-) -> Iterator[Tuple[Any, EmailTextOrContentType]]:
+) -> Iterator[tuple[Any, EmailTextOrContentType]]:
     for message_part in get_message_parts(msg):
         content_type = message_part.get_content_type()
         payload = message_part.get_payload()

@@ -1,4 +1,4 @@
-from typing import Any, Dict, cast, Optional, List, Union
+from typing import Any, cast, Optional, Union
 from datetime import datetime
 
 from pytodotxt import Task, TodoTxtParser  # type: ignore[import]
@@ -9,7 +9,7 @@ REQUIRES = ["pytodotxt>=1.5.0"]
 
 class Todo(Task):
     # support serializing with hpi query
-    def _serialize(self) -> Dict[str, Any]:
+    def _serialize(self) -> dict[str, Any]:
         assert self._raw is not None
         return {
             "completed": self.is_completed,
@@ -61,5 +61,5 @@ class Todo(Task):
 TODOTXT_FILES = ["todo.txt", "done.txt"]
 
 
-def parse_todotxt_buffer(data: Union[str, bytes]) -> List[Todo]:
-    return cast(List[Todo], TodoTxtParser(task_type=Todo).parse(data))
+def parse_todotxt_buffer(data: Union[str, bytes]) -> list[Todo]:
+    return cast(list[Todo], TodoTxtParser(task_type=Todo).parse(data))

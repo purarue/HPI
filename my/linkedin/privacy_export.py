@@ -21,7 +21,8 @@ class config(user_config.privacy_export):
 import csv
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Iterator, Dict, cast, Optional
+from typing import cast, Optional
+from collections.abc import Iterator
 from io import StringIO
 
 import dateparser
@@ -58,7 +59,7 @@ def _dateparser_to_utc(val: str) -> Optional[datetime]:
 
 @dataclass
 class Event:
-    data: Dict[str, str]
+    data: dict[str, str]
     event_type: str  # file name this was read from
 
     def iter_dts(self) -> Iterator[datetime]:

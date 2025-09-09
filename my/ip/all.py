@@ -4,7 +4,7 @@ Combines IPs from data exports which include IP addresses
 
 REQUIRES = ["git+https://github.com/purarue/ipgeocache"]
 
-from typing import Iterator
+from collections.abc import Iterator
 
 from my.ip.common import IP  # type: ignore[import]
 

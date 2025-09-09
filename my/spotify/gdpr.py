@@ -18,7 +18,8 @@ import os
 import json
 from datetime import date
 from pathlib import Path
-from typing import Iterator, Any, NamedTuple, List, Set, Tuple, Sequence, Optional
+from typing import Any, NamedTuple, Optional
+from collections.abc import Iterator, Sequence
 
 from my.core import Res, get_files, make_logger, Json
 
@@ -34,7 +35,7 @@ class Song(NamedTuple):
 class Playlist(NamedTuple):
     name: str
     last_modified: date
-    songs: List[Song]
+    songs: list[Song]
 
 
 Playlists = Iterator[Res[Playlist]]
@@ -87,7 +88,7 @@ def playlists() -> Playlists:
 
 
 def songs() -> Songs:
-    emitted: Set[Tuple[str, str, str]] = set()
+    emitted: set[tuple[str, str, str]] = set()
     for p in playlists():
         if isinstance(p, Exception):
             yield p
@@ -115,7 +116,7 @@ def _filter_playlists(d: Json) -> Iterator[Playlist]:
     # if its just one artist, its probably just an album
     # that's been classified as a playlist
     for p in _parse_all_playlists(d):
-        if len(set([s.artist for s in p.songs])) > 1:
+        if len({s.artist for s in p.songs}) > 1:
             yield p
 
 
@@ -126,7 +127,7 @@ def _parse_all_playlists(d: Json) -> Iterator[Playlist]:
                 f"Ignoring playlist: {plist['name']}, too many followers to be one of my playlists"
             )
             continue
-        songs: List[Song] = [_parse_song(b) for b in plist["items"]]
+        songs: list[Song] = [_parse_song(b) for b in plist["items"]]
         yield Playlist(
             name=plist["name"],
             last_modified=_parse_date(plist["lastModifiedDate"]),
@@ -144,5 +145,5 @@ def _parse_song(song_info: Json) -> Song:
 
 
 def _parse_date(date_str: str) -> date:
-    date_info: List[int] = list(map(int, date_str.split("-")))
+    date_info: list[int] = list(map(int, date_str.split("-")))
     return date(year=date_info[0], month=date_info[1], day=date_info[2])

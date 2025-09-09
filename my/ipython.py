@@ -34,7 +34,8 @@ class config(user_config):
 
 from pathlib import Path
 from datetime import datetime
-from typing import Iterable, NamedTuple, Iterator, Optional
+from typing import NamedTuple, Optional
+from collections.abc import Iterable, Iterator
 from itertools import chain
 
 from more_itertools import unique_everseen

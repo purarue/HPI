@@ -1,4 +1,4 @@
-from typing import Iterator
+from collections.abc import Iterator
 
 from my.ip.common import IP, drop_private  # type: ignore[import]
 

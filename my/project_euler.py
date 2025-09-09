@@ -29,7 +29,8 @@ import re
 import csv
 from pathlib import Path
 from datetime import datetime, timezone
-from typing import Sequence, Iterator, NamedTuple, Optional, List, Dict
+from typing import NamedTuple, Optional
+from collections.abc import Sequence, Iterator
 from itertools import chain, groupby
 
 from my.core import get_files, Stats
@@ -47,12 +48,12 @@ def inputs() -> Sequence[Path]:
 
 def history() -> Iterator[Solution]:
     # need to sort here to dedupe accurately
-    items: List[Solution] = sorted(
+    items: list[Solution] = sorted(
         chain(*map(_parse_file, inputs())), key=lambda s: s.problem
     )
     # group by items, and if there are multiple return the one with the name
     # (or None if there is no name)
-    grouped: Dict[int, List[Solution]] = {
+    grouped: dict[int, list[Solution]] = {
         num: list(problems) for num, problems in groupby(items, lambda s: s.problem)
     }
     for items in grouped.values():

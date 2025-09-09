@@ -11,10 +11,9 @@ from datetime import datetime
 from io import StringIO
 from typing import (
     NamedTuple,
-    Iterator,
-    Sequence,
     Optional,
 )
+from collections.abc import Iterator, Sequence
 from itertools import chain
 from functools import partial
 

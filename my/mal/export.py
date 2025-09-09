@@ -10,7 +10,8 @@ from my.config import mal as user_config  # type: ignore[attr-defined]
 
 from pathlib import Path
 from datetime import datetime
-from typing import Iterator, List, Tuple, NamedTuple, Optional
+from typing import NamedTuple, Optional
+from collections.abc import Iterator
 from functools import lru_cache
 
 from dataclasses import dataclass
@@ -44,17 +45,17 @@ logger = make_logger(__name__)
 # malexport supports multiple accounts
 # in its data directory structure
 @lru_cache(maxsize=1)
-def export_dirs() -> List[Path]:
+def export_dirs() -> list[Path]:
     base: Path = Path(config.export_path).expanduser().absolute()
     with match_structure(base, expected="animelist.xml") as matches:
         return list(matches)
 
 
-Export = Tuple[List[AnimeData], List[MangaData]]
+Export = tuple[list[AnimeData], list[MangaData]]
 
 
 @lru_cache(maxsize=2)
-def _read_malexport_aux(username: str, *, mtimes: Tuple[float, ...]) -> Export:
+def _read_malexport_aux(username: str, *, mtimes: tuple[float, ...]) -> Export:
     logger.debug(f"reading {username}; cache miss: {mtimes}")
     return combine(username)
 
@@ -67,7 +68,7 @@ def _read_malexport(username: str) -> Export:
 
 
 @lru_cache(maxsize=None)
-def _find_deleted_aux(username: str, zips: Tuple[Path, ...]) -> Export:
+def _find_deleted_aux(username: str, zips: tuple[Path, ...]) -> Export:
     return rec_del(
         approved=Approved.parse_from_git_dir(),
         username=username,
@@ -77,7 +78,7 @@ def _find_deleted_aux(username: str, zips: Tuple[Path, ...]) -> Export:
     )
 
 
-def _find_deleted_inputs(username: str) -> Tuple[Path, ...]:
+def _find_deleted_inputs(username: str) -> tuple[Path, ...]:
     if config.zip_backup_path is None:
         return tuple()
     directory_for_user: Path = Path(config.zip_backup_path) / username

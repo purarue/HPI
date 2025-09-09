@@ -10,7 +10,7 @@ from my.config import listenbrainz as user_config  # type: ignore[attr-defined]
 
 
 from pathlib import Path
-from typing import Iterator, Sequence
+from collections.abc import Iterator, Sequence
 from itertools import chain
 
 from listenbrainz_export.parse import Listen, iter_listens

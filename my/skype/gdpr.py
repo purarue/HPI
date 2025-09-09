@@ -25,7 +25,7 @@ class config(user_config.gdpr):
 import json
 from pathlib import Path
 from datetime import datetime
-from typing import Iterator, Sequence
+from collections.abc import Iterator, Sequence
 from itertools import chain
 
 import dateparser

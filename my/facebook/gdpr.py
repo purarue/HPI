@@ -18,7 +18,8 @@ import json
 from datetime import datetime
 from pathlib import Path
 from itertools import chain
-from typing import Iterator, Dict, Any, NamedTuple, Union, Optional, List
+from typing import Any, NamedTuple, Union, Optional
+from collections.abc import Iterator
 
 
 from my.core import get_files, Stats, Res, Json, make_logger
@@ -27,7 +28,7 @@ from my.utils.time import parse_datetime_sec
 
 logger = make_logger(__name__)
 
-FacebookJson = Dict[Any, Any]
+FacebookJson = dict[Any, Any]
 
 
 class Contact(NamedTuple):
@@ -98,8 +99,8 @@ class Message(NamedTuple):
 # a chain of messages back and forth, with one or more people
 class Conversation(NamedTuple):
     title: str
-    participants: List[str]
-    messages: List[Message]
+    participants: list[str]
+    messages: list[Message]
 
 
 Event = Union[
@@ -328,8 +329,8 @@ def _parse_search_history(d: FacebookJson) -> Iterator[Search]:
 def _parse_conversation(
     d: FacebookJson,
 ) -> Iterator[Res[Conversation]]:  # will only return 1 convo
-    participants: List[str] = [p["name"] for p in d["participants"]]
-    good_messages: List[Message] = []
+    participants: list[str] = [p["name"] for p in d["participants"]]
+    good_messages: list[Message] = []
     for m in _parse_messages_in_conversation(d["messages"]):
         # propagate up exception if one exists
         if isinstance(m, Exception):
@@ -344,7 +345,7 @@ def _parse_conversation(
 
 
 def _parse_messages_in_conversation(
-    messages: List[FacebookJson],
+    messages: list[FacebookJson],
 ) -> Iterator[Res[Message]]:
     for m in messages:
         timestamp = parse_datetime_sec(m["timestamp_ms"] / 1000)
@@ -363,7 +364,7 @@ def _parse_messages_in_conversation(
                     metadata=m.get("share"),
                 )
             # if this just actually does not have a field with content for some reason, ignore it
-            elif set(m.keys()).issubset(set(["sender_name", "timestamp_ms", "type"])):
+            elif set(m.keys()).issubset({"sender_name", "timestamp_ms", "type"}):
                 continue
             else:
                 yield RuntimeError(
@@ -372,7 +373,7 @@ def _parse_messages_in_conversation(
                     )
                 )
         else:
-            yield RuntimeError("Not sure how to parse message for type: {}".format(m))
+            yield RuntimeError(f"Not sure how to parse message for type: {m}")
 
 
 # yikes. this is pretty much whenever I posted *anything*, or a third party app communicated
@@ -421,7 +422,7 @@ def _parse_posts(d: FacebookJson) -> Iterator[Res[Union[Post, Action]]]:
                                 )
                             else:
                                 yield RuntimeError(
-                                    "No known way to parse image post {}".format(post)
+                                    f"No known way to parse image post {post}"
                                 )
                         elif "place" in dat:
                             # check-in into place
@@ -479,13 +480,9 @@ def _parse_posts(d: FacebookJson) -> Iterator[Res[Union[Post, Action]]]:
                                 )
                             )
                 else:  # unknown structure
-                    yield RuntimeError(
-                        "No known way to parse data from post {}".format(post)
-                    )
+                    yield RuntimeError(f"No known way to parse data from post {post}")
             else:
-                yield RuntimeError(
-                    "No known way to parse attachment post {}".format(post)
-                )
+                yield RuntimeError(f"No known way to parse attachment post {post}")
         elif "data" in post and len(post["data"]) == 1:
             dat = post["data"][0]
             # basic post I wrote on my timeline
@@ -502,15 +499,15 @@ def _parse_posts(d: FacebookJson) -> Iterator[Res[Union[Post, Action]]]:
                     metadata=dat["profile_update"],
                 )
             else:
-                yield RuntimeError("No known way to parse basic post {}".format(post))
+                yield RuntimeError(f"No known way to parse basic post {post}")
         # post without any actual content (e.g. {'timestamp': 1334515711, 'title': 'purarue posted in club'})
         # treat this as an action since I have no content here
-        elif set(("timestamp", "title")) == set(post.keys()):
+        elif {"timestamp", "title"} == set(post.keys()):
             yield Action(
                 description=post["title"], dt=parse_datetime_sec(post["timestamp"])
             )
         else:
-            yield RuntimeError("No known way to parse post {}".format(post))
+            yield RuntimeError(f"No known way to parse post {post}")
 
 
 def _parse_account_activity(d: FacebookJson) -> Iterator[AdminAction]:

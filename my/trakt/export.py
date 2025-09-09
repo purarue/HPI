@@ -9,7 +9,8 @@ REQUIRES = ["git+https://github.com/purarue/traktexport"]
 from my.config import trakt as user_config  # type: ignore[attr-defined]
 
 from pathlib import Path
-from typing import Iterator, Dict, Any, Sequence, List
+from typing import Any
+from collections.abc import Iterator, Sequence
 from functools import lru_cache
 
 import traktexport.dal as D
@@ -33,7 +34,7 @@ def inputs() -> Sequence[Path]:
     return get_files(config.export_path)
 
 
-def _cachew_depends_on() -> List[float]:
+def _cachew_depends_on() -> list[float]:
     return [Path(f).lstat().st_mtime for f in sorted(inputs())]
 
 
@@ -45,7 +46,7 @@ def _read_trakt_exports() -> D.FullTraktExport:
 ### Expose all the parsed information from traktexport.dal
 
 
-def profile_stats() -> Dict[str, Any]:
+def profile_stats() -> dict[str, Any]:
     # read the 'stats' key directly from the JSON file
     return _read_trakt_exports().stats
 

@@ -25,7 +25,8 @@ setopt EXTENDED_HISTORY   # save time/duration to history file
 from my.config import zsh as user_config  # type: ignore[attr-defined]
 
 from pathlib import Path
-from typing import Sequence, Optional
+from typing import Optional
+from collections.abc import Sequence
 from functools import lru_cache
 
 from dataclasses import dataclass
@@ -75,7 +76,8 @@ def _live_file() -> Optional[Path]:
 import re
 
 from datetime import datetime
-from typing import NamedTuple, Iterator, Tuple
+from typing import NamedTuple
+from collections.abc import Iterator
 from itertools import chain
 
 
@@ -153,7 +155,7 @@ def _parse_file(histfile: Path) -> Results:
 PATTERN = re.compile(r"^: (\d+):(\d+);(.*)$")
 
 
-def _parse_metadata(histline: str) -> Optional[Tuple[datetime, int, str]]:
+def _parse_metadata(histline: str) -> Optional[tuple[datetime, int, str]]:
     """
     parse the date, duration, and command from a line
     """

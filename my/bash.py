@@ -26,9 +26,10 @@ which ls
 from my.config import bash as user_config  # type: ignore[attr-defined]
 
 from pathlib import Path
-from typing import Sequence, List
+from collections.abc import Sequence
 from datetime import datetime
-from typing import NamedTuple, Iterator, Optional
+from typing import NamedTuple, Optional
+from collections.abc import Iterator
 from itertools import chain
 
 from more_itertools import unique_everseen
@@ -61,7 +62,7 @@ class Entry(NamedTuple):
 Results = Iterator[Entry]
 
 
-def _cachew_depends_on() -> List[float]:
+def _cachew_depends_on() -> list[float]:
     return [p.stat().st_mtime for p in inputs()]
 
 

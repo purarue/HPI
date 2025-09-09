@@ -1,4 +1,4 @@
-from typing import Iterator, List
+from collections.abc import Iterator
 from pathlib import Path
 
 from my.ip.common import IP, drop_private  # type: ignore[import]
@@ -11,7 +11,7 @@ from my.core.cachew import mcachew
 logger = make_logger(__name__)
 
 
-def _cachew_depends_on() -> List[float]:
+def _cachew_depends_on() -> list[float]:
     from my.facebook.gdpr import config as facebook_config
 
     return [p.stat().st_mtime for p in Path(facebook_config.gdpr_dir).rglob("*")]

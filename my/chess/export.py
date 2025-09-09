@@ -10,7 +10,8 @@ from my.config import chess as user_config  # type: ignore[attr-defined]
 
 
 from pathlib import Path
-from typing import Iterator, Sequence, List, Union
+from typing import Union
+from collections.abc import Iterator, Sequence
 from itertools import chain
 
 import chess_export.chessdotcom.model as cmodel
@@ -39,7 +40,7 @@ def inputs() -> Sequence[Path]:
 Results = Iterator[Union[cmodel.ChessDotComGame, lmodel.LichessGame]]
 
 
-def _cachew_depends_on() -> List[float]:
+def _cachew_depends_on() -> list[float]:
     return [p.stat().st_mtime for p in inputs()]
 
 

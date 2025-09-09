@@ -18,7 +18,8 @@ class config(user_config.gdpr):
 import csv
 from datetime import datetime
 from pathlib import Path
-from typing import Iterator, Union, Sequence, List
+from typing import Union
+from collections.abc import Iterator, Sequence
 
 from .common import Event, Results
 
@@ -33,7 +34,7 @@ def inputs() -> Sequence[Path]:
     return get_files(config.gdpr_dir, glob="*.csv")
 
 
-def _cachew_depends_on() -> List[float]:
+def _cachew_depends_on() -> list[float]:
     return [p.stat().st_mtime for p in inputs()]
 
 

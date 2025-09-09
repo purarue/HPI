@@ -20,7 +20,8 @@ class config(user_config.advancements):
 
 import json
 from pathlib import Path
-from typing import Sequence, NamedTuple, Iterator, List, Any, Dict
+from typing import NamedTuple, Any
+from collections.abc import Sequence, Iterator
 from datetime import datetime
 from itertools import chain
 
@@ -32,7 +33,7 @@ from more_itertools import unique_everseen
 EXPECTED = ("advancements",)
 
 
-def _advancement_json_files(world_dir: Path) -> List[Path]:
+def _advancement_json_files(world_dir: Path) -> list[Path]:
     d = (world_dir / "advancements").absolute()
     if not d.exists():
         return []
@@ -87,7 +88,7 @@ def _parse_world(world_dir: Path) -> Results:
             # if just a marker and not 'done', don't include
             if "done" in val and val["done"] is False:
                 continue
-            possible_date_blobs: List[Dict[Any, Any]] = [
+            possible_date_blobs: list[dict[Any, Any]] = [
                 v for v in val.values() if isinstance(v, dict)
             ]
             for blob in possible_date_blobs:

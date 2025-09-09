@@ -19,7 +19,8 @@ class config(user_config.scraper):
 
 import os
 from pathlib import Path
-from typing import Iterator, Sequence, Optional
+from typing import Optional
+from collections.abc import Iterator, Sequence
 
 from my.core import get_files, Stats
 

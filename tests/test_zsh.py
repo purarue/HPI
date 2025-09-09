@@ -1,5 +1,6 @@
 from pathlib import Path
-from typing import Callable, Iterator
+from typing import Callable
+from collections.abc import Iterator
 from itertools import chain
 
 from my.zsh import _parse_file, _merge_histories, Entry

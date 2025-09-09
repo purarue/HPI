@@ -21,7 +21,8 @@ class config(user_config.screenshots):
 
 import re
 from pathlib import Path
-from typing import Sequence, Union, NamedTuple, Iterator, Tuple
+from typing import Union, NamedTuple
+from collections.abc import Sequence, Iterator
 from datetime import datetime
 
 from my.core import get_files, Stats
@@ -73,7 +74,7 @@ DT_REGEX = r"%Y-%m-%d_%H-%M-%S"
 # being a naive date isn't an issue if I'm ever in another timezone
 
 
-def _extract_info_from_filename(p: Path) -> Tuple[str, datetime]:
+def _extract_info_from_filename(p: Path) -> tuple[str, datetime]:
     desc, _, dstr = p.stem.rpartition(" ")
     return desc.strip(), datetime.strptime(dstr, DT_REGEX)
 
