@@ -98,61 +98,73 @@ Some basic examples.
 When was I most using reddit?
 
 ```python
->>> import collections, my.reddit.all, pprint
->>> pprint.pprint(collections.Counter([c.created.year for c in my.reddit.all.comments()]))
-Counter({2016: 3288,
-         2017: 801,
-         2015: 523,
-         2018: 209,
-         2019: 65,
-         2014: 4,
-         2020: 3})
+import collections, my.reddit.all, pprint
+
+pprint.pprint(collections.Counter([c.created.year for c in my.reddit.all.comments()]))
+Counter({2016: 3288, 2017: 801, 2015: 523, 2018: 209, 2019: 65, 2014: 4, 2020: 3})
 ```
 
 Most common shell commands?
 
 ```python
->>> import collections, pprint, my.zsh
+import collections, pprint, my.zsh
+
 # lots of these are git-related aliases
->>> pprint.pprint(collections.Counter([c.command for c in my.zsh.history()]).most_common(10))
-[('ls', 51059),
- ('gst', 11361),
- ('ranger', 6530),
- ('yst', 4630),
- ('gds', 3919),
- ('ec', 3808),
- ('clear', 3651),
- ('cd', 2111),
- ('yds', 1647),
- ('ga -A', 1333)]
+pprint.pprint(
+    collections.Counter([c.command for c in my.zsh.history()]).most_common(10)
+)
+[
+    ("ls", 51059),
+    ("gst", 11361),
+    ("ranger", 6530),
+    ("yst", 4630),
+    ("gds", 3919),
+    ("ec", 3808),
+    ("clear", 3651),
+    ("cd", 2111),
+    ("yds", 1647),
+    ("ga -A", 1333),
+]
 ```
 
 What websites do I visit most?
 
 ```python
->>> import collections, pprint, my.browser.export, urllib
->>> pprint.pprint(collections.Counter([urllib.parse.urlparse(h.url).netloc for h in my.browser.export.history()]).most_common(5))
-[('github.com', 20953),
- ('duckduckgo.com', 10146),
- ('www.youtube.com', 10126),
- ('discord.com', 8425),
- ('stackoverflow.com', 2906)]
+import collections, pprint, my.browser.export, urllib
+
+pprint.pprint(
+    collections.Counter(
+        [urllib.parse.urlparse(h.url).netloc for h in my.browser.export.history()]
+    ).most_common(5)
+)
+[
+    ("github.com", 20953),
+    ("duckduckgo.com", 10146),
+    ("www.youtube.com", 10126),
+    ("discord.com", 8425),
+    ("stackoverflow.com", 2906),
+]
 ```
 
 Song I've listened to most?
 
 ```python
->>> import collections, my.mpv.history_daemon
->>> collections.Counter([m.path for m in my.mpv.history_daemon.history()]).most_common(1)[0][0]
-'/home/username/Music/JPEFMAFIA/JPEGMAFIA - LP! - 2021 - V0/JPEGMAFIA - LP! - 05 HAZARD DUTY PAY!.mp3'
+import collections, my.mpv.history_daemon
+
+collections.Counter([m.path for m in my.mpv.history_daemon.history()]).most_common(1)[
+    0
+][0]
+"/home/username/Music/JPEFMAFIA/JPEGMAFIA - LP! - 2021 - V0/JPEGMAFIA - LP! - 05 HAZARD DUTY PAY!.mp3"
 ```
 
 Movie I've watched most?
 
 ```python
->>> import my.trakt, from collections import Counter
->>> Counter(e.media_data.title for e in my.trakt.history()).most_common(1)
-[('Up', 92)]  # (the pixar movie)
+import my.trakt
+from collections import Counter
+
+Counter(e.media_data.title for e in my.trakt.history()).most_common(1)
+[("Up", 92)]  # (the pixar movie)
 ```
 
 `hpi` also has a JSON query interface, so I can do quick computations using shell tools like:
