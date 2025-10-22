@@ -43,7 +43,7 @@ def inputs() -> Sequence[Path]:
 Results = Iterator[Res[Game]]
 
 
-def history(summoner_name: Optional[str] = None) -> Results:
+def history(summoner_name: str | None = None) -> Results:
     sname = summoner_name or config.username
     for g in merge_game_histories(list(inputs()), username=sname):
         try:

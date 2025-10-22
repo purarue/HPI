@@ -28,7 +28,7 @@ class config(user_config.mbox):
     mailboxes: Paths
 
     # any additional extensions to ignore -- by default includes .msf, .dat, .log
-    exclude_extensions: Optional[Sequence[str]] = None
+    exclude_extensions: Sequence[str] | None = None
 
 
 def mailboxes() -> list[Path]:

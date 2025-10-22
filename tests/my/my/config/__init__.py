@@ -4,7 +4,8 @@ Config file used for testing in CI; so that config is defined
 
 import tempfile
 from pathlib import Path
-from typing import Optional, Callable
+from typing import Optional
+from collections.abc import Callable
 from collections.abc import Sequence
 
 from os import environ, path
@@ -23,7 +24,7 @@ class mail:
     class imap:
         mailboxes: Paths = ""
         # filter function which filters the input paths
-        filter_path: Optional[Callable[[Path], bool]] = None
+        filter_path: Callable[[Path], bool] | None = None
 
     class mbox:
         mailboxes: Paths = ""
@@ -32,7 +33,7 @@ class mail:
 
 class zsh:
     export_path: Paths = ""
-    live_file: Optional[PathIsh] = ""
+    live_file: PathIsh | None = ""
 
 
 class bash:
@@ -42,7 +43,7 @@ class bash:
 class todotxt:
     class git_history:
         # path to git_doc_history directory
-        export_path: Optional[PathIsh] = None
+        export_path: PathIsh | None = None
 
     class active:
         # path to your active todo.txt directory
@@ -59,7 +60,7 @@ class rss:
 class mpv:
     class history_daemon:
         export_path: Paths = ""
-        require_percent: Optional[float] = 0.75
+        require_percent: float | None = 0.75
 
 
 class league:
@@ -86,7 +87,7 @@ class trakt:
 class mal:
     class export:
         export_path: PathIsh = ""
-        zip_backup_path: Optional[PathIsh] = ""
+        zip_backup_path: PathIsh | None = ""
 
 
 class grouvee:
@@ -165,7 +166,7 @@ class linkedin:
 
 class scramble:
     class history:
-        config_dir: Optional[PathIsh] = None
+        config_dir: PathIsh | None = None
 
 
 class discord:

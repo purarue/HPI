@@ -10,7 +10,7 @@ class Event(NamedTuple):
     dt: datetime
     channel: str
     # e.g., additional data/chatlog message
-    context: Union[str, int]
+    context: str | int
 
 
 Results = Iterator[Event]

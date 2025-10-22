@@ -64,7 +64,7 @@ extractor = URLExtract()
 
 
 def _remove_link_suppression(
-    content: str, *, urls: Optional[list[tuple[str, tuple[int, int]]]] = None
+    content: str, *, urls: list[tuple[str, tuple[int, int]]] | None = None
 ) -> str:
     # fix content to remove discord link suppression if any links had any
     # e.g. this is a suppressed link <https://github.com>

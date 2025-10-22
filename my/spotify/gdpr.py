@@ -42,7 +42,7 @@ Playlists = Iterator[Res[Playlist]]
 Songs = Iterator[Res[Song]]
 
 
-def inputs(gdpr_dir: Optional[PathIsh] = None) -> Sequence[Path]:
+def inputs(gdpr_dir: PathIsh | None = None) -> Sequence[Path]:
     chosen: PathIsh = gdpr_dir if gdpr_dir is not None else config.gdpr_dir
     echosen = Path(chosen).expanduser().absolute()
     return get_files(echosen, glob="*.json")

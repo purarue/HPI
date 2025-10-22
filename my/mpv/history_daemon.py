@@ -21,7 +21,7 @@ class mpv_config(user_config.history_daemon):
     export_path: Paths
 
     # amount of song I should have listened to to qualify it as a listen (e.g. 0.5, 0.75)
-    require_percent: Optional[float] = None
+    require_percent: float | None = None
 
 
 config = make_config(mpv_config)

@@ -33,7 +33,7 @@ class mal_config(user_config.export):
 
     # this should be the top level directory, not the zip files or username directories
     # see https://github.com/purarue/malexport/#recover_deleted
-    zip_backup_path: Optional[PathIsh] = None
+    zip_backup_path: PathIsh | None = None
 
 
 config = make_config(mal_config)
@@ -85,7 +85,7 @@ def _find_deleted_inputs(username: str) -> tuple[Path, ...]:
     return get_files(directory_for_user, sort=True, glob="*.zip")
 
 
-def _find_deleted(username: str) -> Optional[Export]:
+def _find_deleted(username: str) -> Export | None:
     return _find_deleted_aux(username, _find_deleted_inputs(username))
 
 

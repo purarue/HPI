@@ -49,7 +49,7 @@ def _parse_csv_file(p: Path) -> Iterator[Event]:
         reader = csv.reader(f)
         next(reader)  # ignore header
         for line in reader:
-            context: Union[str, int]
+            context: str | int
             context = line[6]
             if context.isdigit():
                 context = int(line[6])

@@ -66,14 +66,14 @@ class UploadedPhoto(NamedTuple):
 class Post(NamedTuple):
     content: str
     dt: datetime
-    action: Optional[str]
+    action: str | None
 
 
 class Comment(NamedTuple):
     action: str
     dt: datetime
     content: str
-    metadata: Optional[str]
+    metadata: str | None
 
 
 class AcceptedEvent(NamedTuple):
@@ -93,7 +93,7 @@ class Message(NamedTuple):
     author: str
     dt: datetime
     content: str
-    metadata: Optional[str] = None
+    metadata: str | None = None
 
 
 # a chain of messages back and forth, with one or more people
@@ -283,7 +283,7 @@ def _parse_group_activity(d: FacebookJson) -> Iterator[Action]:
         )
 
 
-def _parse_group_posts(d: FacebookJson) -> Iterator[Union[Comment, Post]]:
+def _parse_group_posts(d: FacebookJson) -> Iterator[Comment | Post]:
     for log_data_list in d.values():
         for comm_list in log_data_list.values():
             for comm in comm_list:
@@ -385,7 +385,7 @@ def _parse_messages_in_conversation(
 # list(filter(lambda e: isinstance(e, Exception), events())),
 # throw a 'import pdb; pdb.set_trace()' at where its throwing the error
 # and add a new case for a new type of post
-def _parse_posts(d: FacebookJson) -> Iterator[Res[Union[Post, Action]]]:
+def _parse_posts(d: FacebookJson) -> Iterator[Res[Post | Action]]:
     all_posts = d
     # handle both profile updates and posts
     if isinstance(all_posts, dict) and "profile_updates" in all_posts:

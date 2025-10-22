@@ -12,7 +12,7 @@ skip_if_not_pura = pytest.mark.skipif(
 )
 
 
-def data(file: Optional[str]) -> Path:
+def data(file: str | None) -> Path:
     d = Path(__file__).absolute().parent / "testdata"
     if file:
         d = d / file

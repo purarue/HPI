@@ -51,7 +51,7 @@ def posts() -> Iterator[Post]:
         # hmm -- it seems that I'm always the only user in this?
         # will check an envvar in case someone else has issues configuring this/has different results
         # feel free to open an issue
-        user_id: Optional[str] = os.environ.get("PIAZZA_UID")
+        user_id: str | None = os.environ.get("PIAZZA_UID")
         if user_id is None:
             assert (
                 len(exp.users) > 0

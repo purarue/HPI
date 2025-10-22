@@ -83,7 +83,7 @@ def history() -> Results:
 def _parse_database(sqlite_database: str) -> Results:
     hist = HistoryAccessor(hist_file=sqlite_database)  # type: ignore[no-untyped-call]
     try:
-        total_sessions: Optional[int] = hist.get_last_session_id()
+        total_sessions: int | None = hist.get_last_session_id()
     except Exception as e:
         logger.warning(f"Failed to get last session id: {e}")
         # if database is corrupt/fails to compute sessions, skip

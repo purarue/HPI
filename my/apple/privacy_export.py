@@ -66,7 +66,7 @@ class Location(NamedTuple):
     lat: float
     dt: datetime
     name: str
-    address: Optional[str]
+    address: str | None
 
 
 Event = Union[
@@ -135,7 +135,7 @@ def stats() -> Stats:
 
 def _parse_game_center(
     f: Path,
-) -> Iterator[Union[Game, GameLeaderboardData, GameAchievement]]:
+) -> Iterator[Game | GameLeaderboardData | GameAchievement]:
     for gme in json.loads(f.read_text())["games_state"]:
         yield Game(
             name=gme["game_name"],

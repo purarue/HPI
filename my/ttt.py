@@ -42,7 +42,7 @@ def inputs() -> Sequence[Path]:
 class Entry(NamedTuple):
     dt: datetime
     command: str
-    directory: Optional[str]
+    directory: str | None
 
 
 Results = Iterator[Entry]

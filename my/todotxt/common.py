@@ -31,7 +31,7 @@ class Todo(Task):
     # parse the deadline created by https://github.com/purarue/full_todotxt
     # this is optional, so if it fails, just return None
     @property
-    def deadline(self) -> Optional[datetime]:
+    def deadline(self) -> datetime | None:
         attrs = self.attributes
         if not attrs:
             return None
@@ -61,5 +61,5 @@ class Todo(Task):
 TODOTXT_FILES = ["todo.txt", "done.txt"]
 
 
-def parse_todotxt_buffer(data: Union[str, bytes]) -> list[Todo]:
+def parse_todotxt_buffer(data: str | bytes) -> list[Todo]:
     return cast(list[Todo], TodoTxtParser(task_type=Todo).parse(data))

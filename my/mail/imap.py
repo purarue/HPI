@@ -11,9 +11,9 @@ from my.config import mail as user_config  # type: ignore[attr-defined]
 
 from pathlib import Path
 from typing import (
-    Callable,
     Optional,
 )
+from collections.abc import Callable
 from collections.abc import Iterator
 
 
@@ -28,7 +28,7 @@ class imap_conf(user_config.imap):
     mailboxes: Paths
 
     # filter function which filters the input paths
-    filter_path: Optional[Callable[[Path], bool]] = None
+    filter_path: Callable[[Path], bool] | None = None
 
 
 config = make_config(imap_conf)

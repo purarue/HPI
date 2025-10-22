@@ -36,8 +36,8 @@ class Achievement(NamedTuple):
     description: str
     achieved: bool
     game_name: str
-    achieved_on: Optional[datetime]
-    icon: Optional[str]
+    achieved_on: datetime | None
+    icon: str | None
 
 
 class Game(NamedTuple):
@@ -45,7 +45,7 @@ class Game(NamedTuple):
     name: str
     hours_played: float
     achievements: list[Achievement]
-    image_url: Optional[str]
+    image_url: str | None
 
     @property
     def achieved(self) -> int:

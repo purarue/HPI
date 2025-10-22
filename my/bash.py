@@ -78,7 +78,7 @@ def history() -> Results:
 
 
 def _parse_file(histfile: Path) -> Results:
-    dt: Optional[datetime] = None
+    dt: datetime | None = None
     command_buf = ""  # current command
     for line in histfile.open(encoding="latin-1"):
         if line.startswith("#"):

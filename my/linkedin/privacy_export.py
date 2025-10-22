@@ -50,7 +50,7 @@ DATELIKE_KEYS = {"date", "time"}
 ENDSWITH_KEYS = {" on", " at"}
 
 
-def _dateparser_to_utc(val: str) -> Optional[datetime]:
+def _dateparser_to_utc(val: str) -> datetime | None:
     dt_data = dateparser.parse(val)
     if dt_data is not None:
         return datetime.fromtimestamp(dt_data.timestamp(), tz=timezone.utc)
@@ -77,7 +77,7 @@ class Event:
                         yield data
 
     @property
-    def dt(self) -> Optional[datetime]:
+    def dt(self) -> datetime | None:
         """Try to parse a datetime from this event"""
         if hasattr(self, "_dt"):
             return cast(datetime, getattr(self, "_dt"))

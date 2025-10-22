@@ -51,7 +51,7 @@ class config(user_config):
     export_path: Paths
 
     # path to current zsh history (i.e. the live file)
-    live_file: Optional[PathIsh]
+    live_file: PathIsh | None
 
 
 logger = make_logger(__name__)
@@ -62,7 +62,7 @@ def backup_inputs() -> Sequence[Path]:
 
 
 @lru_cache(1)
-def _live_file() -> Optional[Path]:
+def _live_file() -> Path | None:
     if config.live_file is not None:
         p: Path = Path(config.live_file).expanduser().absolute()
         if p.exists():
@@ -122,8 +122,8 @@ def _merge_histories(*sources: Results) -> Results:
 
 
 def _parse_file(histfile: Path) -> Results:
-    dt: Optional[datetime] = None
-    dur: Optional[int] = None
+    dt: datetime | None = None
+    dur: int | None = None
     command: str = ""
     # can't parse line by line since some commands are multiline
     # sort of structured like a do-while loop
@@ -155,7 +155,7 @@ def _parse_file(histfile: Path) -> Results:
 PATTERN = re.compile(r"^: (\d+):(\d+);(.*)$")
 
 
-def _parse_metadata(histline: str) -> Optional[tuple[datetime, int, str]]:
+def _parse_metadata(histline: str) -> tuple[datetime, int, str] | None:
     """
     parse the date, duration, and command from a line
     """

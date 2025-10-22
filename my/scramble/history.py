@@ -15,7 +15,7 @@ from my.config import scramble as user_config  # type: ignore[attr-defined]
 
 @dataclass
 class scramble_config(user_config.history):
-    config_dir: Optional[PathIsh] = None
+    config_dir: PathIsh | None = None
 
 
 config = make_config(scramble_config)

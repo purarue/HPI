@@ -2,7 +2,8 @@ import csv
 import logging
 
 from pathlib import Path
-from typing import Callable, TypeVar, Optional
+from typing import TypeVar, Optional
+from collections.abc import Callable
 from collections.abc import Iterator
 
 T = TypeVar("T")
@@ -11,7 +12,7 @@ T = TypeVar("T")
 def parse_csv_file(
     histfile: Path,
     parse_function: Callable[[str], Iterator[T]],
-    logger: Optional[logging.Logger] = None,
+    logger: logging.Logger | None = None,
 ) -> Iterator[T]:
     """
     Parses a CSV file using parse_function, yield results from that function.

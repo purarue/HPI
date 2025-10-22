@@ -39,7 +39,7 @@ from my.core import get_files, Stats
 class Solution(NamedTuple):
     problem: int
     dt: datetime
-    name: Optional[str]
+    name: str | None
 
 
 def inputs() -> Sequence[Path]:

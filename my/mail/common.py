@@ -53,12 +53,12 @@ class Email(MailParser):
     # https://docs.python.org/3/library/email.message.html#module-email.message
     def __init__(self, message: Message) -> None:
         super().__init__(message=message)
-        self.filepath: Optional[Path] = None
-        self._dt: Optional[datetime] = None  # property to cache datetime result
+        self.filepath: Path | None = None
+        self._dt: datetime | None = None  # property to cache datetime result
         self._dateparser_failed: bool = False  # if dateparser previously failed
 
     @property
-    def dt(self) -> Optional[datetime]:
+    def dt(self) -> datetime | None:
         """
         Try to parse datetime if mail date wasn't in RFC 2822 format
         """
@@ -72,7 +72,7 @@ class Email(MailParser):
             self._dt = d
             return self._dt
         if "Date" in self.headers:
-            dateparser_res: Optional[datetime] = dateparser.parse(self.headers["Date"])
+            dateparser_res: datetime | None = dateparser.parse(self.headers["Date"])
             # if this failed to parse, save it on the object
             if dateparser_res is None:
                 self._dateparser_failed = True
@@ -118,7 +118,7 @@ Subject: {self.subject}"""
 
     @classmethod
     def safe_parse(
-        cls, fp: Union[str, bytes, Message, TextIO], display_filename: Path
+        cls, fp: str | bytes | Message | TextIO, display_filename: Path
     ) -> Optional["Email"]:
         try:
             if isinstance(fp, bytes):
