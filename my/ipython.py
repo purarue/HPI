@@ -34,7 +34,7 @@ class config(user_config):
 
 from pathlib import Path
 from datetime import datetime
-from typing import NamedTuple, Optional
+from typing import NamedTuple
 from collections.abc import Iterable, Iterator
 from itertools import chain
 

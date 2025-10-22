@@ -18,7 +18,6 @@ class config(user_config.gdpr):
 import csv
 from datetime import datetime
 from pathlib import Path
-from typing import Union
 from collections.abc import Iterator, Sequence
 
 from .common import Event, Results

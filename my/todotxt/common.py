@@ -1,4 +1,4 @@
-from typing import Any, cast, Optional, Union
+from typing import Any, cast
 from datetime import datetime
 
 from pytodotxt import Task, TodoTxtParser  # type: ignore[import]

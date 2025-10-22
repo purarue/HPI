@@ -19,7 +19,7 @@ import json
 from functools import partial
 from pathlib import Path
 from datetime import datetime
-from typing import NamedTuple, Optional, Any
+from typing import NamedTuple, Any
 from collections.abc import Iterator, Sequence
 from itertools import groupby
 

@@ -25,7 +25,6 @@ setopt EXTENDED_HISTORY   # save time/duration to history file
 from my.config import zsh as user_config  # type: ignore[attr-defined]
 
 from pathlib import Path
-from typing import Optional
 from collections.abc import Sequence
 from functools import lru_cache
 

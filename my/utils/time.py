@@ -1,4 +1,3 @@
-from typing import Union
 from datetime import datetime, timezone
 
 from my.core import __NOT_HPI_MODULE__  # noqa: F401

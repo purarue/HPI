@@ -21,7 +21,7 @@ import os
 import json
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, NamedTuple, Union, Optional
+from typing import Any, NamedTuple, Union
 from collections.abc import Iterator, Sequence
 
 from lxml import etree  # type: ignore[import]

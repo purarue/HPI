@@ -21,7 +21,7 @@ class config(user_config.privacy_export):
 import csv
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import cast, Optional
+from typing import cast
 from collections.abc import Iterator
 from io import StringIO
 

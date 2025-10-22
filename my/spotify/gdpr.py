@@ -18,7 +18,7 @@ import os
 import json
 from datetime import date
 from pathlib import Path
-from typing import Any, NamedTuple, Optional
+from typing import Any, NamedTuple
 from collections.abc import Iterator, Sequence
 
 from my.core import Res, get_files, make_logger, Json

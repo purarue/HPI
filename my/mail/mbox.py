@@ -9,7 +9,7 @@ from my.config import mail as user_config  # type: ignore[attr-defined]
 
 import mailbox
 from pathlib import Path
-from typing import Optional, IO, Any
+from typing import IO, Any
 from collections.abc import Iterator, Sequence
 
 from dataclasses import dataclass

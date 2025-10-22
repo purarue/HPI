@@ -33,7 +33,7 @@ class discord_config(user_config.data_export):
 config = make_config(discord_config)
 
 
-from typing import Optional, NamedTuple
+from typing import NamedTuple
 from collections.abc import Iterator
 from datetime import datetime
 

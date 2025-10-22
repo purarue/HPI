@@ -18,7 +18,7 @@ import json
 from datetime import datetime
 from pathlib import Path
 from itertools import chain
-from typing import Any, NamedTuple, Union, Optional
+from typing import Any, NamedTuple, Union
 from collections.abc import Iterator
 
 

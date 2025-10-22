@@ -4,7 +4,6 @@ from email.message import Message
 from typing import (
     TextIO,
     Optional,
-    Union,
     Any,
     cast,
 )

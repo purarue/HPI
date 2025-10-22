@@ -29,7 +29,7 @@ import re
 import csv
 from pathlib import Path
 from datetime import datetime, timezone
-from typing import NamedTuple, Optional
+from typing import NamedTuple
 from collections.abc import Sequence, Iterator
 from itertools import chain, groupby
 

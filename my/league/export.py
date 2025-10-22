@@ -21,7 +21,6 @@ class config(user_config.export):
 
 
 from pathlib import Path
-from typing import Optional
 from collections.abc import Iterator, Sequence
 
 from my.core import get_files, Stats, Res, make_logger

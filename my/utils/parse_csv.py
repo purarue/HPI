@@ -2,7 +2,7 @@ import csv
 import logging
 
 from pathlib import Path
-from typing import TypeVar, Optional
+from typing import TypeVar
 from collections.abc import Callable
 from collections.abc import Iterator
 

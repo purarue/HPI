@@ -6,7 +6,6 @@ https://github.com/purarue/scramble-history
 REQUIRES = ["git+https://github.com/purarue/scramble-history"]
 
 from pathlib import Path
-from typing import Optional
 from dataclasses import dataclass
 from my.core import PathIsh, make_config
 

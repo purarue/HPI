@@ -10,9 +10,6 @@ REQUIRES = ["mail-parser", "dateparser"]
 from my.config import mail as user_config  # type: ignore[attr-defined]
 
 from pathlib import Path
-from typing import (
-    Optional,
-)
 from collections.abc import Callable
 from collections.abc import Iterator
 

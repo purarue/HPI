@@ -10,7 +10,7 @@ from my.config import mal as user_config  # type: ignore[attr-defined]
 
 from pathlib import Path
 from datetime import datetime
-from typing import NamedTuple, Optional
+from typing import NamedTuple
 from collections.abc import Iterator
 from functools import lru_cache
 

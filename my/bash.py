@@ -28,7 +28,7 @@ from my.config import bash as user_config  # type: ignore[attr-defined]
 from pathlib import Path
 from collections.abc import Sequence
 from datetime import datetime
-from typing import NamedTuple, Optional
+from typing import NamedTuple
 from collections.abc import Iterator
 from itertools import chain
 
