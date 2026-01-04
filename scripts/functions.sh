@@ -87,3 +87,7 @@ trakt-describe-movie() {
 trakt-describe-episode() {
 	jq -r '"\(.media_data.show.title) (\(.media_data.show.year)) - S\(.media_data.season)E\(.media_data.episode) \(.media_data.title)"'
 }
+
+trakt-recent-episodes() {
+	traktexport partial_export purplepinapples --pages 1 2>/dev/null | jq '.history | .[] | select(.type == "episode") | "https://trakt.tv/shows/\(.show.ids.slug)/\(.episode.season)/\(.episode.number)"' -r
+}
