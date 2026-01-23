@@ -21,7 +21,7 @@ jobs:
     steps:
       - run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
 
