@@ -7,14 +7,14 @@ REQUIRES = ["git+https://github.com/purarue/scramble-history"]
 
 from pathlib import Path
 from dataclasses import dataclass
-from my.core import PathIsh, make_config
+from my.core import make_config
 
 from my.config import scramble as user_config  # type: ignore[attr-defined]
 
 
 @dataclass
 class scramble_config(user_config.history):
-    config_dir: PathIsh | None = None
+    config_dir: Path | str | None = None
 
 
 config = make_config(scramble_config)

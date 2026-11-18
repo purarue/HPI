@@ -5,19 +5,19 @@ Parses the spotify GPDR Export
 # see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import spotify as user_config  # type: ignore[attr-defined]
 
+from pathlib import Path
 from dataclasses import dataclass
-from my.core import PathIsh, Stats
+from my.core import Stats
 
 
 @dataclass
 class config(user_config.gdpr):
-    gdpr_dir: PathIsh  # path to unpacked GDPR archive
+    gdpr_dir: Path | str  # path to unpacked GDPR archive
 
 
 import os
 import json
 from datetime import date
-from pathlib import Path
 from typing import Any, NamedTuple
 from collections.abc import Iterator, Sequence
 
@@ -42,8 +42,8 @@ Playlists = Iterator[Res[Playlist]]
 Songs = Iterator[Res[Song]]
 
 
-def inputs(gdpr_dir: PathIsh | None = None) -> Sequence[Path]:
-    chosen: PathIsh = gdpr_dir if gdpr_dir is not None else config.gdpr_dir
+def inputs(gdpr_dir: Path | str | None = None) -> Sequence[Path]:
+    chosen: Path | str = gdpr_dir if gdpr_dir is not None else config.gdpr_dir
     echosen = Path(chosen).expanduser().absolute()
     return get_files(echosen, glob="*.json")
 

@@ -6,18 +6,17 @@ https://www.twitch.tv/p/en/legal/privacy-choices/#user-privacy-requests
 # see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import twitch as user_config  # type: ignore[attr-defined]
 
+from pathlib import Path
 from dataclasses import dataclass
-from my.core import PathIsh
 
 
 @dataclass
 class config(user_config.gdpr):
-    gdpr_dir: PathIsh  # path to unpacked GDPR archive
+    gdpr_dir: Path | str  # path to unpacked GDPR archive
 
 
 import csv
 from datetime import datetime
-from pathlib import Path
 from collections.abc import Iterator, Sequence
 
 from .common import Event, Results

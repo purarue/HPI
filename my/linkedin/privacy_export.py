@@ -8,19 +8,18 @@ REQUIRES = ["dateparser"]
 # see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import linkedin as user_config  # type: ignore[attr-defined]
 
+from pathlib import Path
 from dataclasses import dataclass
-from my.core import PathIsh
 
 
 @dataclass
 class config(user_config.privacy_export):
     # path to unpacked privacy export, or a zip
-    gdpr_dir: PathIsh
+    gdpr_dir: Path | str
 
 
 import csv
 from datetime import datetime, timezone
-from pathlib import Path
 from typing import cast
 from collections.abc import Iterator
 from io import StringIO

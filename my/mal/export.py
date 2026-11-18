@@ -15,7 +15,7 @@ from collections.abc import Iterator
 from functools import lru_cache
 
 from dataclasses import dataclass
-from my.core import Stats, make_logger, PathIsh, make_config, get_files
+from my.core import Stats, make_logger, make_config, get_files
 from my.core.structure import match_structure
 
 from malexport.paths import LocalDir
@@ -29,11 +29,11 @@ from malexport.parse.recover_deleted_entries import recover_deleted as rec_del, 
 @dataclass
 class mal_config(user_config.export):
     # path[s]/glob to the exported data
-    export_path: PathIsh
+    export_path: Path | str
 
     # this should be the top level directory, not the zip files or username directories
     # see https://github.com/purarue/malexport/#recover_deleted
-    zip_backup_path: PathIsh | None = None
+    zip_backup_path: Path | str | None = None
 
 
 config = make_config(mal_config)
