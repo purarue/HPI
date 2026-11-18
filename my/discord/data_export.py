@@ -12,7 +12,7 @@ from pathlib import Path
 from dataclasses import dataclass
 
 from my.config import discord as user_config  # type: ignore[attr-defined]
-from my.core import PathIsh, make_config
+from my.core import make_config
 from my.core.cachew import mcachew
 
 
@@ -20,7 +20,7 @@ from my.core.cachew import mcachew
 class discord_config(user_config.data_export):
     # path to the top level discord export directory
     # see https://github.com/purarue/discord_data for more info
-    export_path: PathIsh
+    export_path: Path | str
 
     # whether to guess the compression of the files in the export_path
     # this uses kompress.ZipPath, which is a bit experimental

@@ -13,7 +13,7 @@ from pathlib import Path
 from collections.abc import Iterator
 
 from dataclasses import dataclass
-from my.core import Stats, PathIsh
+from my.core import Stats
 from .common import Todo, TODOTXT_FILES, parse_todotxt_buffer
 
 
@@ -21,7 +21,7 @@ from .common import Todo, TODOTXT_FILES, parse_todotxt_buffer
 class config(user_config.active):
     # path to your active todo.txt directory
     # this is the same place todo.sh stores your files
-    export_path: PathIsh
+    export_path: Path | str
 
 
 def inputs() -> tuple[Path, Path]:

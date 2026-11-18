@@ -4,19 +4,18 @@ Parses the facebook GPDR Export
 
 # see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import facebook as user_config  # type: ignore[attr-defined]
+from pathlib import Path
 from dataclasses import dataclass
-from my.core import PathIsh
 
 
 @dataclass
 class config(user_config.gdpr):
-    gdpr_dir: PathIsh  # path to unpacked GDPR archive
+    gdpr_dir: Path | str  # path to unpacked GDPR archive
 
 
 import os
 import json
 from datetime import datetime
-from pathlib import Path
 from itertools import chain
 from typing import Any, NamedTuple, Union
 from collections.abc import Iterator

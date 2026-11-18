@@ -9,12 +9,12 @@ from collections.abc import Sequence
 
 from os import environ, path
 
-from my.core.common import PathIsh, Paths
+from my.core.common import Paths
 
 
 class core:
-    cache_dir: PathIsh = path.join(environ["HOME"], ".cache", "cachew")
-    tmp_dir: PathIsh = path.join(tempfile.gettempdir(), "HPI-tempdir")
+    cache_dir: Path | str = path.join(environ["HOME"], ".cache", "cachew")
+    tmp_dir: Path | str = path.join(tempfile.gettempdir(), "HPI-tempdir")
     enabled_modules: Sequence[str] = []
     disabled_modules: Sequence[str] = []
 
@@ -32,7 +32,7 @@ class mail:
 
 class zsh:
     export_path: Paths = ""
-    live_file: PathIsh | None = ""
+    live_file: Path | str | None = ""
 
 
 class bash:
@@ -42,11 +42,11 @@ class bash:
 class todotxt:
     class git_history:
         # path to git_doc_history directory
-        export_path: PathIsh | None = None
+        export_path: Path | str | None = None
 
     class active:
         # path to your active todo.txt directory
-        export_path: PathIsh = ""
+        export_path: Path | str = ""
         error_policy = "drop"
 
 
@@ -85,8 +85,8 @@ class trakt:
 
 class mal:
     class export:
-        export_path: PathIsh = ""
-        zip_backup_path: PathIsh | None = ""
+        export_path: Path | str = ""
+        zip_backup_path: Path | str | None = ""
 
 
 class grouvee:
@@ -124,12 +124,12 @@ class skype:
 
 class facebook:
     class gdpr:
-        gdpr_dir: PathIsh = ""
+        gdpr_dir: Path | str = ""
 
 
 class spotify:
     class gdpr:
-        gdpr_dir: PathIsh = ""
+        gdpr_dir: Path | str = ""
 
 
 class twitch:
@@ -137,7 +137,7 @@ class twitch:
         export_path: Paths = ""
 
     class gdpr:
-        gdpr_dir: PathIsh = ""
+        gdpr_dir: Path | str = ""
 
 
 class ipython:
@@ -155,17 +155,17 @@ class activitywatch:
 
 class apple:
     class privacy_export:
-        gdpr_dir: PathIsh = ""
+        gdpr_dir: Path | str = ""
 
 
 class linkedin:
     class privacy_export:
-        gdpr_dir: PathIsh = ""
+        gdpr_dir: Path | str = ""
 
 
 class scramble:
     class history:
-        config_dir: PathIsh | None = None
+        config_dir: Path | str | None = None
 
 
 class discord:

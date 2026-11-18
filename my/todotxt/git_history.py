@@ -20,14 +20,14 @@ from collections.abc import Iterator
 from git_doc_history import DocHistory, parse_snapshot_diffs, Action
 
 from dataclasses import dataclass
-from my.core import Stats, PathIsh
+from my.core import Stats
 from .common import Todo, TODOTXT_FILES, parse_todotxt_buffer
 
 
 @dataclass
 class config(user_config.git_history):
     # path to the git backup directory
-    export_path: PathIsh
+    export_path: Path | str
 
 
 def input() -> DocHistory:

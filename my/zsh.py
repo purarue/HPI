@@ -34,7 +34,6 @@ from my.core import (
     warn_if_empty,
     Stats,
     make_logger,
-    PathIsh,
     Paths,
 )
 from my.core.cachew import mcachew
@@ -50,7 +49,7 @@ class config(user_config):
     export_path: Paths
 
     # path to current zsh history (i.e. the live file)
-    live_file: PathIsh | None
+    live_file: Path | str | None
 
 
 logger = make_logger(__name__)

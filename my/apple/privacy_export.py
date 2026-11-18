@@ -7,20 +7,19 @@ REQUIRES = ["lxml"]
 
 # see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import apple as user_config  # type: ignore[attr-defined]
+from pathlib import Path
 from dataclasses import dataclass
-from my.core import PathIsh
 
 
 @dataclass
 class config(user_config.privacy_export):
     # path to unpacked GDPR archive
-    gdpr_dir: PathIsh
+    gdpr_dir: Path | str
 
 
 import os
 import json
 from datetime import datetime, timezone
-from pathlib import Path
 from typing import Any, NamedTuple, Union
 from collections.abc import Iterator, Sequence
 

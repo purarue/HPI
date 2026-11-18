@@ -20,13 +20,13 @@ from git_doc_history import (
 )
 
 from dataclasses import dataclass
-from my.core import Stats, PathIsh
+from my.core import Stats
 
 
 @dataclass
 class config(user_config.newsboat.git_history):
     # path to the git backup directory
-    export_path: PathIsh
+    export_path: Path | str
 
 
 RSS_FILES = ["urls"]

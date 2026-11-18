@@ -5,19 +5,19 @@ from: https://github.com/purarue/blizzard_gdpr_parser
 
 # see https://github.com/purarue/dotfiles/blob/master/.config/my/my/config/__init__.py for an example
 from my.config import blizzard as user_config  # type: ignore[attr-defined]
+from pathlib import Path
 from dataclasses import dataclass
-from my.core import PathIsh, make_logger
+from my.core import make_logger
 from my.core.cachew import mcachew
 
 
 @dataclass
 class config(user_config.gdpr):
     # path to the exported data
-    export_path: PathIsh
+    export_path: Path | str
 
 
 import json
-from pathlib import Path
 from datetime import datetime
 from typing import NamedTuple
 from collections.abc import Iterator, Sequence
